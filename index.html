@@ -114,6 +114,34 @@ body {
   letter-spacing: 0.04em;
 }
 
+/* SYNC STATUS */
+.sync-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 4px 1.25rem;
+  background: rgba(0,0,0,0.12);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.07em;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  min-height: 24px;
+}
+.sync-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  flex-shrink: 0;
+  transition: background 0.3s;
+}
+.sync-dot.ok      { background: #4ade80; }
+.sync-dot.saving  { background: var(--orange); }
+.sync-dot.error   { background: #f87171; }
+
 /* FILTER */
 .filter-row {
   display: flex;
@@ -409,6 +437,12 @@ body {
   </div>
 </div>
 
+<!-- Barra de status de sincronização -->
+<div class="sync-bar">
+  <span class="sync-dot" id="syncDot"></span>
+  <span id="syncMsg">carregando...</span>
+</div>
+
 <div class="filter-row">
   <button class="filter-btn active" onclick="setFilter('todos',this)">Todos</button>
   <button class="filter-btn" onclick="setFilter('Qui 30/04',this)">Qui 30/04</button>
@@ -419,6 +453,12 @@ body {
 <div id="taskList"></div>
 
 <script>
+// ============================================================
+// ⚙️  CONFIGURAÇÃO — cole a URL do seu Apps Script aqui
+// ============================================================
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxxGKCwm0IQ1RGrqIyS_IpHYNYMxT67zyn-BlzD0XCLWBnGt4dXrp0RSrMdRBlfWY9t/exec';
+// ============================================================
+
 const tasks = [
   { id:1,  day:"Qui 30/04", time:"15h+",            who:"Mari Camilo",    tel:"+5512982062718", local:"",                      desc:"Styling/customização — 2 a 3 mesas com pelo menos 4 cadeiras cada. Demais itens já providenciados." },
   { id:2,  day:"Qui 30/04", time:"15h+",            who:"Mari Camilo",    tel:"+5512982062718", local:"",                      desc:"Stand Feminina — 1 mesa baixa (tipo hall) e 1 poltrona. Logo do Feminina já autorizada pela pastora Ester." },
@@ -436,15 +476,81 @@ const tasks = [
   { id:14, day:"Sáb 02/05", time:"19h",             who:"Jhoey David",   tel:"+5512981754011", local:"",                      desc:"Arrumar as cadeiras do auditório. Voluntários estarão servindo na ministração da noite." },
 ];
 
-const done    = new Set(JSON.parse(localStorage.getItem('eleve_done') || '[]'));
-const ratings = JSON.parse(localStorage.getItem('eleve_ratings') || '{}');
+// Estado local (cache para uso offline / enquanto salva)
+let done    = new Set();
+let ratings = {};
 let openCard  = null;
 let hoverStar = {};
 let filter    = 'todos';
+let saveTimer = null;
 
-function saveDone()    { localStorage.setItem('eleve_done',    JSON.stringify([...done])); }
-function saveRatings() { localStorage.setItem('eleve_ratings', JSON.stringify(ratings)); }
+// ── SYNC ────────────────────────────────────────────────────
+function setSyncStatus(state, msg) {
+  const dot = document.getElementById('syncDot');
+  const txt = document.getElementById('syncMsg');
+  dot.className = 'sync-dot ' + state;
+  txt.textContent = msg;
+}
 
+async function loadFromSheet() {
+  if (SHEET_URL === 'https://script.google.com/macros/s/AKfycbxxGKCwm0IQ1RGrqIyS_IpHYNYMxT67zyn-BlzD0XCLWBnGt4dXrp0RSrMdRBlfWY9t/exec') {
+    setSyncStatus('error', 'URL não configurada — usando armazenamento local');
+    loadFromLocal();
+    return;
+  }
+  setSyncStatus('', 'sincronizando...');
+  try {
+    const res  = await fetch(SHEET_URL + '?action=load');
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    done    = new Set(data.done || []);
+    ratings = data.ratings || {};
+    setSyncStatus('ok', 'sincronizado');
+    render();
+  } catch (e) {
+    setSyncStatus('error', 'erro ao carregar — usando cache local');
+    loadFromLocal();
+  }
+}
+
+async function saveToSheet() {
+  setSyncStatus('saving', 'salvando...');
+  saveToLocal(); // salva localmente sempre como fallback
+  if (SHEET_URL === 'https://script.google.com/macros/s/AKfycbxxGKCwm0IQ1RGrqIyS_IpHYNYMxT67zyn-BlzD0XCLWBnGt4dXrp0RSrMdRBlfWY9t/exec') {
+    setSyncStatus('error', 'URL não configurada');
+    return;
+  }
+  try {
+    const res = await fetch(SHEET_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'save', done: [...done], ratings })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    setSyncStatus('ok', 'salvo ' + new Date().toLocaleTimeString('pt-BR', { hour:'2-digit', minute:'2-digit' }));
+  } catch (e) {
+    setSyncStatus('error', 'erro ao salvar (cache local mantido)');
+  }
+}
+
+// Debounce: aguarda 800 ms após última mudança para salvar
+function scheduleSave() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveToSheet, 800);
+}
+
+// ── LOCAL STORAGE (fallback) ──────────────────────────────
+function loadFromLocal() {
+  done    = new Set(JSON.parse(localStorage.getItem('eleve_done')    || '[]'));
+  ratings = JSON.parse(localStorage.getItem('eleve_ratings') || '{}');
+  render();
+}
+function saveToLocal() {
+  localStorage.setItem('eleve_done',    JSON.stringify([...done]));
+  localStorage.setItem('eleve_ratings', JSON.stringify(ratings));
+}
+
+// ── AÇÕES ─────────────────────────────────────────────────
 function setFilter(f, btn) {
   filter = f;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -457,7 +563,8 @@ function toggleCard(id) { openCard = openCard === id ? null : id; render(); }
 
 function toggleDone(id) {
   if (done.has(id)) done.delete(id); else done.add(id);
-  saveDone(); render();
+  scheduleSave();
+  render();
 }
 
 function setHoverStar(id, n) { hoverStar[id] = n; renderStars(id); }
@@ -492,11 +599,12 @@ function saveRating(id) {
   const ta = document.getElementById('comment-' + id);
   if (!ratings[id]) ratings[id] = { stars: 0, comment: '' };
   ratings[id].comment = ta ? ta.value.trim() : '';
-  saveRatings();
+  scheduleSave();
   const el = document.getElementById('saved-' + id);
   if (el) { el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 2500); }
 }
 
+// ── RENDER ────────────────────────────────────────────────
 function render() {
   const filtered = filter === 'todos' ? tasks : tasks.filter(t => t.day === filter);
   const days = [...new Set(filtered.map(t => t.day))];
@@ -568,7 +676,8 @@ function render() {
   document.getElementById('progressLabel').textContent = `${done.size}/${tasks.length}`;
 }
 
-render();
+// ── INICIALIZAÇÃO ─────────────────────────────────────────
+loadFromSheet();
 </script>
 </body>
 </html>
