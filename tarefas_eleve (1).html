@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Runners — ELV CONF 26</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #F5A300;
+  --orange-dark: #D4860A;
+  --red: #D42B1E;
+  --red-dark: #A81F14;
+  --bg: #F5A300;
+  --text-dark: #1A0800;
+  --text-light: #fff;
+  --muted: rgba(26,8,0,0.52);
+  --border: rgba(0,0,0,0.11);
+  --border2: rgba(0,0,0,0.20);
+  --green: #1F7A3A;
+  --green-bg: rgba(31,122,58,0.13);
+  --radius: 6px;
+  --radius-lg: 10px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--bg);
+  color: var(--text-dark);
+  min-height: 100vh;
+  padding-bottom: 3rem;
+}
+
+/* HEADER */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--red);
+  padding: 0.875rem 1.25rem 0.875rem;
+  box-shadow: 0 2px 0 var(--red-dark);
+}
+.header-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1px;
+}
+.brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  text-transform: uppercase;
+}
+.verse-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+.header-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 56px;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  color: var(--text-light);
+  text-shadow: 3px 3px 0 var(--red-dark);
+}
+.header-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-top: 3px;
+}
+.progress-wrap {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.progress-bar-bg {
+  flex: 1;
+  height: 4px;
+  background: rgba(0,0,0,0.28);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--orange);
+  border-radius: 99px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+.progress-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--orange);
+  min-width: 38px;
+  text-align: right;
+  letter-spacing: 0.04em;
+}
+
+/* FILTER */
+.filter-row {
+  display: flex;
+  gap: 6px;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.filter-row::-webkit-scrollbar { display: none; }
+.filter-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 3px;
+  border: 2px solid rgba(0,0,0,0.18);
+  background: rgba(255,255,255,0.25);
+  color: var(--text-dark);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.filter-btn.active {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red-dark);
+}
+
+/* DAY GROUP */
+.day-group { padding: 0 1rem; margin-top: 0.5rem; }
+.day-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+  padding: 0.625rem 0 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.day-label::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 2px;
+}
+
+/* CARD */
+.card {
+  background: rgba(255,255,255,0.9);
+  border-radius: var(--radius-lg);
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  transition: opacity 0.2s, transform 0.12s;
+  animation: fadeUp 0.22s ease both;
+  box-shadow: 2px 3px 0 rgba(0,0,0,0.16);
+}
+.card:active { transform: scale(0.985); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card.done { opacity: 0.32; }
+.card.done .card-title { text-decoration: line-through; }
+
+.card-main {
+  padding: 0.875rem 1rem 0.875rem 1.1rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  border-left: 5px solid var(--red);
+}
+.card.done .card-main { border-left-color: rgba(0,0,0,0.18); }
+
+.card-row1 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+.card-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  font-style: italic;
+  color: #fff;
+  background: var(--red);
+  padding: 1px 7px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  letter-spacing: 0.04em;
+}
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  flex: 1;
+  color: #1A0800;
+}
+.card-time {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: italic;
+  color: var(--red);
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 5px;
+  align-items: center;
+}
+.tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+.tag-who   { background: rgba(0,0,0,0.07); color: rgba(26,8,0,0.6); }
+.tag-local { background: var(--orange); color: var(--red-dark); }
+
+/* DETAIL */
+.card-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.card-detail.open { max-height: 720px; }
+
+.detail-inner {
+  border-top: 1px solid rgba(0,0,0,0.07);
+  padding: 0.875rem 1rem;
+  background: rgba(245,163,0,0.05);
+}
+.detail-meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px 12px;
+  margin-bottom: 12px;
+}
+.meta-lbl {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.meta-val { color: #1A0800; font-weight: 500; font-size: 13px; }
+.meta-val a { color: var(--red); text-decoration: none; font-weight: 700; }
+
+.action-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: var(--radius);
+  border: 2px solid rgba(0,0,0,0.12);
+  background: rgba(0,0,0,0.06);
+  color: #1A0800;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn:active { opacity: 0.75; }
+.btn-done   { background: var(--green-bg); color: var(--green); border-color: rgba(31,122,58,0.22); }
+.btn-undone { background: rgba(212,43,30,0.1); color: var(--red); border-color: rgba(212,43,30,0.22); }
+.btn-call   { background: rgba(0,0,0,0.05); color: rgba(26,8,0,0.6); }
+
+/* RATING */
+.rating-section {
+  border-top: 2px dashed rgba(0,0,0,0.1);
+  padding: 0.875rem 1rem;
+  background: rgba(0,0,0,0.025);
+}
+.rating-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+  display: block;
+}
+.stars { display: flex; gap: 3px; margin-bottom: 10px; }
+.star {
+  font-size: 32px;
+  cursor: pointer;
+  color: rgba(0,0,0,0.13);
+  transition: color 0.1s, transform 0.1s;
+  line-height: 1;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.star.lit { color: var(--red); }
+.star:active { transform: scale(1.3); }
+
+.rating-comment {
+  width: 100%;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  color: #1A0800;
+  background: rgba(255,255,255,0.75);
+  border: 2px solid rgba(0,0,0,0.13);
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  resize: none;
+  outline: none;
+  transition: border-color 0.15s;
+  margin-bottom: 8px;
+}
+.rating-comment:focus { border-color: var(--red); }
+.rating-comment::placeholder { color: rgba(26,8,0,0.32); }
+
+.btn-save-rating {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 22px;
+  border-radius: var(--radius);
+  border: none;
+  background: var(--red);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--red-dark);
+  transition: opacity 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  margin-bottom: 0.875rem;
+}
+.btn-save-rating:active { opacity: 0.82; transform: translate(1px,1px); box-shadow: 1px 1px 0 var(--red-dark); }
+
+.rating-saved {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 0.06em;
+  color: var(--green);
+  margin-bottom: 0.875rem;
+  display: none;
+}
+.rating-saved.show { display: block; }
+
+.empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted);
+  font-size: 14px;
+}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="header-eyebrow">
+    <span class="brand">ELV CONF 26 · Runners</span>
+    <span class="verse-tag">Hebreus 12</span>
+  </div>
+  <div class="header-title">Pedidos</div>
+  <div class="header-sub">30 abr – 02 mai · equipe de apoio</div>
+  <div class="progress-wrap">
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+    <span class="progress-label" id="progressLabel">0/14</span>
+  </div>
+</div>
+
+<div class="filter-row">
+  <button class="filter-btn active" onclick="setFilter('todos',this)">Todos</button>
+  <button class="filter-btn" onclick="setFilter('Qui 30/04',this)">Qui 30/04</button>
+  <button class="filter-btn" onclick="setFilter('Sex 01/05',this)">Sex 01/05</button>
+  <button class="filter-btn" onclick="setFilter('Sáb 02/05',this)">Sáb 02/05</button>
+</div>
+
+<div id="taskList"></div>
+
+<script>
+const tasks = [
+  { id:1,  day:"Qui 30/04", time:"15h+",            who:"Mari Camilo",    tel:"+5512982062718", local:"",                      desc:"Styling/customização — 2 a 3 mesas com pelo menos 4 cadeiras cada. Demais itens já providenciados." },
+  { id:2,  day:"Qui 30/04", time:"15h+",            who:"Mari Camilo",    tel:"+5512982062718", local:"",                      desc:"Stand Feminina — 1 mesa baixa (tipo hall) e 1 poltrona. Logo do Feminina já autorizada pela pastora Ester." },
+  { id:3,  day:"Qui 30/04", time:"22h",             who:"Allan",          tel:"+5512982641127", local:"Auditório Nações",      desc:"Montagem do auditório Nações para a Creative-SE. Arrumar Nações pós sessão Eleve Conference." },
+  { id:4,  day:"Sex 01/05", time:"9h15",            who:"Giovani OC",     tel:"+5512997574857", local:"Comunidade",            desc:"Movimentação de poltronas/sofá para Talk." },
+  { id:5,  day:"Sex 01/05", time:"9h50",            who:"Giovani OC",     tel:"+5512997574857", local:"Principal",             desc:"Movimentação de poltronas para Talk." },
+  { id:6,  day:"Sex 01/05", time:"13h",             who:"Allan",          tel:"+5512982641127", local:"Auditório Nações",      desc:"Desmontar tudo e voltar o auditório Nações ao normal, pós sessão da manhã." },
+  { id:7,  day:"Sex 01/05", time:"15h30–16h30",     who:"Jhoey David",   tel:"+5512981754011", local:"",                      desc:"Arrumar o auditório para a Sala Sobrenatural. Principal demanda: cadeiras. Voluntários envolvidos, mas precisam de apoio pela dinâmica da conf. Finalizar até 16h30." },
+  { id:8,  day:"Sex 01/05", time:"~17h",            who:"Julia Sendretti",tel:"+5512982726046", local:"Comunidade",            desc:"Levar arquibancadas que estarão em frente ao espelhado para o Comunidade." },
+  { id:9,  day:"Sex 01/05", time:"18h50",           who:"Jhoey David",   tel:"+5512981754011", local:"",                      desc:"Reorganizar o auditório para as 30 Semanas. Mexer nas cadeiras após a Sala Sobrenatural. Voluntários não darão conta sozinhos." },
+  { id:10, day:"Sex 01/05", time:"19h–20h",         who:"Gabriela Baroni",tel:"+5511977413420", local:"Colina",                desc:"Pegar as frutas da corrida na prefeitura, trazer para o espelhado e colocar nas mesas espalhadas pelos pontos na Colina (pontos a definir)." },
+  { id:11, day:"Sáb 02/05", time:"10h–11h30",       who:"Jhoey David",   tel:"+5512981754011", local:"",                      desc:"Arrumar o auditório para a Sala Sobrenatural. Principal demanda: cadeiras. Voluntários envolvidos, mas precisam de apoio pela dinâmica da conf. Finalizar até 11h30." },
+  { id:12, day:"Sáb 02/05", time:"10h20",           who:"Giovani OC",     tel:"+5512997574857", local:"Principal e Comunidade",desc:"Movimentação de poltronas para Talk." },
+  { id:13, day:"Sáb 02/05", time:"15h (ev. 16h)",   who:"Thiago Silva",   tel:"+5512981909790", local:"",                      desc:"Colocar mesas para jogos de cartas e tabuleiro, retirar cadeiras para liberar espaço. Deixar 4–5 fileiras de frente para o palco." },
+  { id:14, day:"Sáb 02/05", time:"19h",             who:"Jhoey David",   tel:"+5512981754011", local:"",                      desc:"Arrumar as cadeiras do auditório. Voluntários estarão servindo na ministração da noite." },
+];
+
+const done    = new Set(JSON.parse(localStorage.getItem('eleve_done') || '[]'));
+const ratings = JSON.parse(localStorage.getItem('eleve_ratings') || '{}');
+let openCard  = null;
+let hoverStar = {};
+let filter    = 'todos';
+
+function saveDone()    { localStorage.setItem('eleve_done',    JSON.stringify([...done])); }
+function saveRatings() { localStorage.setItem('eleve_ratings', JSON.stringify(ratings)); }
+
+function setFilter(f, btn) {
+  filter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  openCard = null;
+  render();
+}
+
+function toggleCard(id) { openCard = openCard === id ? null : id; render(); }
+
+function toggleDone(id) {
+  if (done.has(id)) done.delete(id); else done.add(id);
+  saveDone(); render();
+}
+
+function setHoverStar(id, n) { hoverStar[id] = n; renderStars(id); }
+function clearHoverStar(id)  { hoverStar[id] = 0; renderStars(id); }
+
+function pickStar(id, n) {
+  if (!ratings[id]) ratings[id] = { stars: 0, comment: '' };
+  ratings[id].stars = n;
+  hoverStar[id] = 0;
+  renderStars(id);
+  const el = document.getElementById('saved-' + id);
+  if (el) el.classList.remove('show');
+}
+
+function renderStars(id) {
+  const c = document.getElementById('stars-' + id);
+  if (!c) return;
+  const saved  = (ratings[id] && ratings[id].stars) || 0;
+  const active = hoverStar[id] || saved;
+  let h = '';
+  for (let i = 1; i <= 5; i++) {
+    h += `<span class="star${i <= active ? ' lit' : ''}"
+      onmouseenter="setHoverStar(${id},${i})"
+      onmouseleave="clearHoverStar(${id})"
+      ontouchstart="event.preventDefault();pickStar(${id},${i})"
+      onclick="pickStar(${id},${i})">★</span>`;
+  }
+  c.innerHTML = h;
+}
+
+function saveRating(id) {
+  const ta = document.getElementById('comment-' + id);
+  if (!ratings[id]) ratings[id] = { stars: 0, comment: '' };
+  ratings[id].comment = ta ? ta.value.trim() : '';
+  saveRatings();
+  const el = document.getElementById('saved-' + id);
+  if (el) { el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 2500); }
+}
+
+function render() {
+  const filtered = filter === 'todos' ? tasks : tasks.filter(t => t.day === filter);
+  const days = [...new Set(filtered.map(t => t.day))];
+  let html = '';
+
+  if (!filtered.length) {
+    html = '<div class="empty">Nenhum pedido para este dia.</div>';
+  } else {
+    days.forEach(day => {
+      const dt = filtered.filter(t => t.day === day);
+      html += `<div class="day-group"><div class="day-label">${day}</div>`;
+      dt.forEach((t, i) => {
+        const isDone  = done.has(t.id);
+        const isOpen  = openCard === t.id;
+        const short   = t.desc.length > 62 ? t.desc.slice(0,62)+'…' : t.desc;
+        const r       = ratings[t.id];
+        const hasStar = r && r.stars > 0;
+        const badge   = hasStar ? `<span style="font-size:12px;color:#D42B1E;letter-spacing:1px">${'★'.repeat(r.stars)}</span>` : '';
+
+        html += `
+        <div class="card${isDone?' done':''}" style="animation-delay:${i*0.04}s">
+          <div class="card-main" onclick="toggleCard(${t.id})">
+            <div class="card-row1">
+              <span class="card-num">#${String(t.id).padStart(2,'0')}</span>
+              <span class="card-title">${isOpen ? t.desc : short}</span>
+              <span class="card-time">${t.time}</span>
+            </div>
+            <div class="card-tags">
+              <span class="tag tag-who">${t.who}</span>
+              ${t.local ? `<span class="tag tag-local">${t.local}</span>` : ''}
+              ${!isOpen ? badge : ''}
+            </div>
+          </div>
+          <div class="card-detail${isOpen?' open':''}">
+            <div class="detail-inner">
+              <div class="detail-meta">
+                <span class="meta-lbl">Horário</span><span class="meta-val">${t.time}</span>
+                ${t.local?`<span class="meta-lbl">Local</span><span class="meta-val">${t.local}</span>`:''}
+                <span class="meta-lbl">Tel</span><span class="meta-val"><a href="tel:${t.tel}">${t.tel}</a></span>
+              </div>
+              <div class="action-row">
+                <button class="btn ${isDone?'btn-undone':'btn-done'}" onclick="toggleDone(${t.id})">
+                  ${isDone ? '↩ Desfazer' : '✓ Concluído'}
+                </button>
+                <a class="btn btn-call" href="tel:${t.tel}">Ligar</a>
+                <a class="btn btn-call" href="https://wa.me/${t.tel}">Zap</a>
+              </div>
+            </div>
+            <div class="rating-section">
+              <span class="rating-label">Avaliação do atendimento</span>
+              <div class="stars" id="stars-${t.id}"></div>
+              <textarea class="rating-comment" id="comment-${t.id}" rows="2"
+                placeholder="Deixe um comentário (opcional)...">${r&&r.comment?r.comment:''}</textarea><br>
+              <button class="btn-save-rating" onclick="saveRating(${t.id})">Salvar avaliação</button>
+              <div class="rating-saved" id="saved-${t.id}">✓ Avaliação salva!</div>
+            </div>
+          </div>
+        </div>`;
+      });
+      html += '</div>';
+    });
+  }
+
+  document.getElementById('taskList').innerHTML = html;
+  tasks.forEach(t => { if (openCard === t.id) renderStars(t.id); });
+
+  const pct = Math.round((done.size / tasks.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${done.size}/${tasks.length}`;
+}
+
+render();
+</script>
+</body>
+</html>
