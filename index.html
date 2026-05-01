@@ -7,219 +7,116 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --orange: #F5A300;
-  --orange-dark: #D4860A;
-  --red: #D42B1E;
-  --red-dark: #A81F14;
-  --bg: #F5A300;
-  --text-dark: #1A0800;
-  --text-light: #fff;
-  --muted: rgba(26,8,0,0.52);
-  --green: #1F7A3A;
-  --green-bg: rgba(31,122,58,0.13);
-  --radius: 6px;
-  --radius-lg: 10px;
+  --orange:#F5A300; --orange-dark:#D4860A;
+  --red:#D42B1E;    --red-dark:#A81F14;
+  --bg:#F5A300;     --text:#1A0800;
+  --white:rgba(255,255,255,0.9);
+  --muted:rgba(26,8,0,0.52);
+  --green:#1A6B32;  --green-bg:rgba(26,107,50,0.12);
+  --amber:#7A4800;  --amber-bg:rgba(196,117,0,0.13);
+  --radius:6px;     --radius-lg:10px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'Barlow', sans-serif;
-  background: var(--bg);
-  color: var(--text-dark);
-  min-height: 100vh;
-  padding-bottom: 3rem;
-}
- 
-/* HEADER */
-.app-header {
-  position: sticky; top: 0; z-index: 20;
-  background: var(--red);
-  padding: 0.875rem 1.25rem;
-  box-shadow: 0 2px 0 var(--red-dark);
-}
-.header-eyebrow { display:flex; align-items:center; justify-content:space-between; margin-bottom:1px; }
-.brand {
-  font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
-  font-size:12px; letter-spacing:0.1em; color:var(--orange); text-transform:uppercase;
-}
-.verse-tag {
-  font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700;
-  letter-spacing:0.06em; text-transform:uppercase; color:rgba(255,255,255,0.45);
-}
-.header-title {
-  font-family:'Barlow Condensed',sans-serif; font-size:56px; font-weight:900;
-  font-style:italic; text-transform:uppercase; line-height:0.88;
-  color:var(--text-light); text-shadow:3px 3px 0 var(--red-dark);
-}
-.header-sub {
-  font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700;
-  letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-top:3px;
-}
-.progress-wrap { margin-top:10px; display:flex; align-items:center; gap:10px; }
-.progress-bar-bg { flex:1; height:4px; background:rgba(0,0,0,0.28); border-radius:99px; overflow:hidden; }
-.progress-bar-fill { height:100%; background:var(--orange); border-radius:99px; transition:width 0.4s ease; width:0%; }
-.progress-label {
-  font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:900;
-  font-style:italic; color:var(--orange); min-width:38px; text-align:right;
-}
- 
-/* FILTER */
-.filter-row { display:flex; gap:6px; padding:0.75rem 1rem; overflow-x:auto; scrollbar-width:none; }
-.filter-row::-webkit-scrollbar { display:none; }
-.filter-btn {
-  font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:800; font-style:italic;
-  letter-spacing:0.06em; text-transform:uppercase; padding:6px 16px; border-radius:3px;
-  border:2px solid rgba(0,0,0,0.18); background:rgba(255,255,255,0.25);
-  color:var(--text-dark); cursor:pointer; white-space:nowrap;
-  transition:all 0.15s; -webkit-tap-highlight-color:transparent;
-}
-.filter-btn.active { background:var(--red); color:#fff; border-color:var(--red-dark); }
- 
-/* DAY GROUP */
-.day-group { padding:0 1rem; margin-top:0.5rem; }
-.day-label {
-  font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:900;
-  font-style:italic; letter-spacing:0.1em; text-transform:uppercase;
-  color:var(--red); padding:0.625rem 0 0.4rem;
-  display:flex; align-items:center; gap:8px;
-}
-.day-label::after { content:''; flex:1; height:2px; background:rgba(0,0,0,0.15); border-radius:2px; }
- 
-/* CARD */
-.card {
-  background:rgba(255,255,255,0.9); border-radius:var(--radius-lg);
-  margin-bottom:0.5rem; overflow:hidden;
-  transition:opacity 0.2s, transform 0.12s;
-  animation:fadeUp 0.22s ease both;
-  box-shadow:2px 3px 0 rgba(0,0,0,0.16);
-}
-.card:active { transform:scale(0.985); }
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(8px); }
-  to   { opacity:1; transform:translateY(0); }
-}
- 
-/* done: subtle dim, NO strikethrough */
-.card.done { opacity:0.45; }
- 
-.card-main {
-  padding:0.875rem 1rem 0.875rem 1.1rem;
-  cursor:pointer; -webkit-tap-highlight-color:transparent;
-  user-select:none; border-left:5px solid var(--red);
-}
-.card.imediata .card-main { border-left-color:#C47500; }
-.card.done .card-main     { border-left-color:rgba(31,122,58,0.6); }
- 
-.card-row1 { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; margin-bottom:5px; }
-.card-num {
-  font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:900; font-style:italic;
-  color:#fff; background:var(--red); padding:1px 7px; border-radius:3px;
-  flex-shrink:0; margin-top:1px;
-}
-.card.imediata .card-num { background:#C47500; }
-.card.done .card-num     { background:rgba(31,122,58,0.7); }
- 
-.card-title { font-size:14px; font-weight:600; line-height:1.4; flex:1; color:#1A0800; }
-.card-time {
-  font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:900;
-  font-style:italic; color:var(--red); flex-shrink:0;
-}
-.card.imediata .card-time { color:#C47500; }
-.card.done .card-time     { color:rgba(31,122,58,0.8); }
- 
-.card-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:5px; align-items:center; }
-.tag {
-  font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:800;
-  font-style:italic; letter-spacing:0.05em; text-transform:uppercase;
-  padding:2px 8px; border-radius:3px;
-}
-.tag-who       { background:rgba(0,0,0,0.07); color:rgba(26,8,0,0.6); }
-.tag-local     { background:var(--orange); color:var(--red-dark); }
-.tag-plan      { background:rgba(31,122,58,0.12); color:#1F7A3A; }
-.tag-imediata  { background:rgba(196,117,0,0.14); color:#7A4800; animation:pulse 1.6s ease-in-out infinite; }
-.tag-concluido {
-  background:rgba(31,122,58,0.85); color:#fff;
-  font-size:12px; padding:3px 10px; border-radius:3px;
-}
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
- 
-/* DETAIL */
-.card-detail { max-height:0; overflow:hidden; transition:max-height 0.35s ease; }
-.card-detail.open { max-height:820px; }
- 
-.detail-inner {
-  border-top:1px solid rgba(0,0,0,0.07);
-  padding:0.875rem 1rem; background:rgba(245,163,0,0.05);
-}
-.detail-meta { display:grid; grid-template-columns:auto 1fr; gap:5px 12px; margin-bottom:12px; }
-.meta-lbl {
-  font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:800;
-  font-style:italic; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted);
-}
-.meta-val { color:#1A0800; font-weight:500; font-size:13px; }
-.meta-val a { color:var(--red); text-decoration:none; font-weight:700; }
- 
-.desc-list { margin:4px 0 0 2px; padding-left:14px; font-size:13px; line-height:1.7; color:#1A0800; }
- 
-.action-row { display:flex; gap:6px; flex-wrap:wrap; }
-.btn {
-  font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:800;
-  font-style:italic; letter-spacing:0.07em; text-transform:uppercase;
-  padding:7px 16px; border-radius:var(--radius);
-  border:2px solid rgba(0,0,0,0.12); background:rgba(0,0,0,0.06);
-  color:#1A0800; cursor:pointer; transition:opacity 0.15s;
-  -webkit-tap-highlight-color:transparent; text-decoration:none; display:inline-block;
-}
-.btn:active { opacity:0.75; }
-.btn-done   { background:var(--green-bg); color:var(--green); border-color:rgba(31,122,58,0.22); }
-.btn-undone { background:rgba(212,43,30,0.1); color:var(--red); border-color:rgba(212,43,30,0.22); }
-.btn-call   { background:rgba(0,0,0,0.05); color:rgba(26,8,0,0.6); }
- 
-/* RATING */
-.rating-section {
-  border-top:2px dashed rgba(0,0,0,0.1);
-  padding:0.875rem 1rem; background:rgba(0,0,0,0.025);
-}
-.rating-label {
-  font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:900;
-  font-style:italic; letter-spacing:0.1em; text-transform:uppercase;
-  color:var(--muted); margin-bottom:8px; display:block;
-}
-.stars { display:flex; gap:3px; margin-bottom:10px; }
-.star {
-  font-size:32px; cursor:pointer; color:rgba(0,0,0,0.13);
-  transition:color 0.1s, transform 0.1s; line-height:1;
-  -webkit-tap-highlight-color:transparent; user-select:none;
-}
-.star.lit { color:var(--red); }
-.star:active { transform:scale(1.3); }
-.rating-comment {
-  width:100%; font-family:'Barlow',sans-serif; font-size:13px; color:#1A0800;
-  background:rgba(255,255,255,0.75); border:2px solid rgba(0,0,0,0.13);
-  border-radius:var(--radius); padding:8px 10px; resize:none; outline:none;
-  transition:border-color 0.15s; margin-bottom:8px;
-}
-.rating-comment:focus { border-color:var(--red); }
-.rating-comment::placeholder { color:rgba(26,8,0,0.32); }
-.btn-save-rating {
-  font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:900;
-  font-style:italic; letter-spacing:0.1em; text-transform:uppercase;
-  padding:8px 22px; border-radius:var(--radius); border:none;
-  background:var(--red); color:#fff; cursor:pointer;
-  box-shadow:2px 2px 0 var(--red-dark); transition:opacity 0.15s;
-  -webkit-tap-highlight-color:transparent; margin-bottom:0.875rem;
-}
-.btn-save-rating:active { opacity:0.82; transform:translate(1px,1px); box-shadow:1px 1px 0 var(--red-dark); }
-.rating-saved {
-  font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:800;
-  font-style:italic; color:var(--green); margin-bottom:0.875rem; display:none;
-}
-.rating-saved.show { display:block; }
- 
-.empty { text-align:center; padding:3rem 1rem; color:var(--muted); font-size:14px; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:3rem;}
+
+/* ── HEADER ── */
+.app-header{position:sticky;top:0;z-index:20;background:var(--red);padding:.875rem 1.25rem .5rem;box-shadow:0 2px 0 var(--red-dark);}
+.header-eyebrow{display:flex;align-items:center;justify-content:space-between;margin-bottom:1px;}
+.brand{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:12px;letter-spacing:.1em;color:var(--orange);text-transform:uppercase;}
+.verse-tag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.45);}
+.header-title{font-family:'Barlow Condensed',sans-serif;font-size:52px;font-weight:900;font-style:italic;text-transform:uppercase;line-height:.88;color:#fff;text-shadow:3px 3px 0 var(--red-dark);}
+.header-sub{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:3px;}
+
+/* ── TAB NAV ── */
+.tab-nav{display:flex;background:var(--red-dark);}
+.tab-btn{flex:1;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:900;font-style:italic;letter-spacing:.08em;text-transform:uppercase;padding:10px 0;border:none;background:transparent;color:rgba(255,255,255,.5);cursor:pointer;border-bottom:3px solid transparent;transition:all .15s;}
+.tab-btn.active{color:#fff;border-bottom-color:var(--orange);}
+
+/* ── GLOBAL INDICATORS (top of pedidos tab) ── */
+.indicators{background:rgba(0,0,0,.18);padding:.65rem 1rem;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;border-bottom:2px solid var(--red-dark);}
+.ind-card{background:rgba(255,255,255,.1);border-radius:6px;padding:.45rem .4rem;text-align:center;border:1px solid rgba(255,255,255,.12);}
+.ind-value{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;font-style:italic;line-height:1;color:#fff;}
+.ind-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:2px;line-height:1.2;}
+.ind-card.green  .ind-value{color:#6EE89A;}
+.ind-card.amber  .ind-value{color:#FFD066;}
+.ind-card.orange .ind-value{color:var(--orange);}
+
+/* ── FILTER ── */
+.filter-row{display:flex;gap:6px;padding:.65rem 1rem;overflow-x:auto;scrollbar-width:none;}
+.filter-row::-webkit-scrollbar{display:none;}
+.filter-btn{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;font-style:italic;letter-spacing:.06em;text-transform:uppercase;padding:5px 14px;border-radius:3px;border:2px solid rgba(0,0,0,.18);background:rgba(255,255,255,.28);color:var(--text);cursor:pointer;white-space:nowrap;transition:all .15s;}
+.filter-btn.active{background:var(--red);color:#fff;border-color:var(--red-dark);}
+
+/* ── CARDS ── */
+.day-group{padding:0 1rem;margin-top:.5rem;}
+.day-label{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:900;font-style:italic;letter-spacing:.1em;text-transform:uppercase;color:var(--red);padding:.625rem 0 .4rem;display:flex;align-items:center;gap:8px;}
+.day-label::after{content:'';flex:1;height:2px;background:rgba(0,0,0,.15);border-radius:2px;}
+.card{background:var(--white);border-radius:var(--radius-lg);margin-bottom:.5rem;overflow:hidden;animation:fadeUp .2s ease both;box-shadow:2px 3px 0 rgba(0,0,0,.15);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+.card.done{opacity:.42;}
+.card-body{padding:.875rem 1rem .875rem 1.1rem;border-left:5px solid var(--red);}
+.card.imediata .card-body{border-left-color:#C47500;}
+.card.done     .card-body{border-left-color:rgba(26,107,50,.65);}
+.card-row1{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:5px;}
+.card-num{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:900;font-style:italic;color:#fff;background:var(--red);padding:1px 7px;border-radius:3px;flex-shrink:0;margin-top:1px;}
+.card.imediata .card-num{background:#C47500;}
+.card.done     .card-num{background:rgba(26,107,50,.75);}
+.card-title{font-size:14px;font-weight:600;line-height:1.4;flex:1;color:#1A0800;}
+.card-time{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:900;font-style:italic;color:var(--red);flex-shrink:0;}
+.card.imediata .card-time{color:#C47500;}
+.card.done     .card-time{color:rgba(26,107,50,.8);}
+.desc-list{margin:6px 0 0 2px;padding-left:14px;font-size:13px;line-height:1.7;color:#1A0800;}
+.card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;align-items:center;}
+.tag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;font-style:italic;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:3px;}
+.tag-who{background:rgba(0,0,0,.07);color:rgba(26,8,0,.6);}
+.tag-local{background:var(--orange);color:var(--red-dark);}
+.tag-plan{background:rgba(26,107,50,.11);color:var(--green);}
+.tag-imediata{background:var(--amber-bg);color:var(--amber);animation:pulse 1.6s ease-in-out infinite;}
+.tag-concluido{background:rgba(26,107,50,.82);color:#fff;}
+.tag-tel{background:rgba(0,0,0,.06);color:rgba(26,8,0,.55);font-style:normal;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.empty{text-align:center;padding:3rem 1rem;color:var(--muted);font-size:14px;}
+
+/* ── DASHBOARD ── */
+.dash{padding:1rem;display:none;flex-direction:column;gap:1rem;}
+.dash.active{display:flex;}
+
+.dash-section{background:var(--white);border-radius:var(--radius-lg);padding:1rem;box-shadow:2px 3px 0 rgba(0,0,0,.13);}
+.dash-title{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:900;font-style:italic;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:.875rem;border-left:4px solid var(--red);padding-left:8px;}
+
+/* donut */
+.donut-wrap{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;}
+.donut-chart{flex-shrink:0;}
+.donut-legend{display:flex;flex-direction:column;gap:6px;font-size:13px;}
+.legend-item{display:flex;align-items:center;gap:7px;}
+.legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.legend-label{color:var(--text);font-weight:500;}
+.legend-val{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-style:italic;font-size:14px;margin-left:auto;padding-left:12px;}
+
+/* person bars */
+.person-list{display:flex;flex-direction:column;gap:10px;}
+.person-row{}
+.person-name{font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px;display:flex;justify-content:space-between;}
+.person-name span{font-family:'Barlow Condensed',sans-serif;font-style:italic;font-size:13px;color:var(--muted);}
+.bar-track{background:rgba(0,0,0,.08);border-radius:99px;overflow:hidden;height:8px;display:flex;}
+.bar-seg{height:100%;transition:width .5s ease;}
+
+/* person detail cards */
+.person-detail{margin-top:.5rem;}
+.pdc{background:rgba(245,163,0,.07);border:1px solid rgba(0,0,0,.07);border-radius:var(--radius);padding:.625rem .75rem;margin-bottom:.5rem;}
+.pdc-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:900;font-style:italic;color:var(--red);margin-bottom:6px;}
+.pdc-stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px;}
+.pdc-stat{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:800;font-style:italic;padding:2px 9px;border-radius:3px;}
+.pdc-stat.total  {background:rgba(0,0,0,.08);color:var(--text);}
+.pdc-stat.done   {background:rgba(26,107,50,.82);color:#fff;}
+.pdc-stat.pending{background:rgba(212,43,30,.1);color:var(--red);}
+.pdc-stat.imed   {background:var(--amber-bg);color:var(--amber);}
+.pdc-stat.plan   {background:rgba(26,107,50,.11);color:var(--green);}
+.pdc-bar-track{background:rgba(0,0,0,.08);border-radius:99px;overflow:hidden;height:6px;display:flex;}
 </style>
 </head>
 <body>
- 
+
 <div class="app-header">
   <div class="header-eyebrow">
     <span class="brand">ELV CONF 26 · Runners</span>
@@ -227,253 +124,276 @@ body {
   </div>
   <div class="header-title">Pedidos</div>
   <div class="header-sub">30 abr – 02 mai · equipe de apoio</div>
-  <div class="progress-wrap">
-    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
-    <span class="progress-label" id="progressLabel">0/21</span>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('pedidos',this)">📋 Pedidos</button>
+    <button class="tab-btn"        onclick="showTab('dash',this)">📊 Dashboard</button>
   </div>
 </div>
- 
-<div class="filter-row">
-  <button class="filter-btn active" onclick="setFilter('todos',this)">Todos</button>
-  <button class="filter-btn" onclick="setFilter('Qui 30/04',this)">Qui 30/04</button>
-  <button class="filter-btn" onclick="setFilter('Sex 01/05',this)">Sex 01/05</button>
-  <button class="filter-btn" onclick="setFilter('Sáb 02/05',this)">Sáb 02/05</button>
-  <button class="filter-btn" onclick="setFilter('imediata',this)">⚡ Imediatas</button>
-  <button class="filter-btn" onclick="setFilter('pendente',this)">🔲 Pendentes</button>
+
+<!-- ── PEDIDOS TAB ── -->
+<div id="tab-pedidos">
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="setFilter('todos',this)">Todos</button>
+    <button class="filter-btn" onclick="setFilter('Qui 30/04',this)">Qui 30/04</button>
+    <button class="filter-btn" onclick="setFilter('Sex 01/05',this)">Sex 01/05</button>
+    <button class="filter-btn" onclick="setFilter('Sáb 02/05',this)">Sáb 02/05</button>
+  </div>
+  <div id="taskList"></div>
 </div>
- 
-<div id="taskList"></div>
- 
+
+<!-- ── DASHBOARD TAB ── -->
+<div class="dash" id="tab-dash">
+
+  <!-- Visão geral donut -->
+  <div class="dash-section">
+    <div class="dash-title">Visão Geral</div>
+    <div class="donut-wrap">
+      <svg class="donut-chart" width="110" height="110" viewBox="0 0 110 110" id="donutSvg"></svg>
+      <div class="donut-legend" id="donutLegend"></div>
+    </div>
+  </div>
+
+  <!-- Barras por dia -->
+  <div class="dash-section">
+    <div class="dash-title">Pedidos por Dia</div>
+    <div class="person-list" id="dayBars"></div>
+  </div>
+
+  <!-- Barras por tipo -->
+  <div class="dash-section">
+    <div class="dash-title">Planejado vs Imediata</div>
+    <div class="person-list" id="typeBars"></div>
+  </div>
+
+  <!-- Por pessoa -->
+  <div class="dash-section">
+    <div class="dash-title">Pedidos por Pessoa</div>
+    <div class="person-list" id="personBars"></div>
+  </div>
+
+  <!-- Detalhe por pessoa -->
+  <div class="dash-section">
+    <div class="dash-title">Detalhe por Pessoa</div>
+    <div class="person-detail" id="personDetail"></div>
+  </div>
+
+</div>
+
 <script>
 const tasks = [
-  { id:1,  day:"Qui 30/04", time:"15h+",          who:"Mari Camilo",    tel:"+5512982062718", local:"",          status:"plan",     concluido:true,
-    desc:"Styling/customização — 2 a 3 mesas com pelo menos 4 cadeiras cada. Demais itens já providenciados." },
-  { id:2,  day:"Qui 30/04", time:"15h+",          who:"Mari Camilo",    tel:"+5512982062718", local:"",          status:"plan",     concluido:true,
-    desc:"Stand Feminina — 1 mesa baixa (tipo hall) e 1 poltrona. Logo do Feminina já autorizada pela pastora Ester." },
-  { id:3,  day:"Qui 30/04", time:"16h",           who:"Renan Cenários", tel:"+5512997400926", local:"Espelhado", status:"imediata", concluido:true,
-    desc:"Levar as arquibancadas para a frente do espelhado." },
-  { id:4,  day:"Qui 30/04", time:"20h",           who:"Pr. Carlito",    tel:"Confidencial",   local:"Galeria",   status:"imediata", concluido:true,
-    desc:"Ligar os ventiladores da galeria." },
-  { id:5,  day:"Qui 30/04", time:"22h",           who:"Allan",          tel:"+5512982641127", local:"Auditório Nações", status:"plan", concluido:true,
-    desc:"Montagem do auditório Nações para a Creative-SE. Arrumar Nações pós sessão Eleve Conference." },
-  { id:6,  day:"Qui 30/04", time:"22h",           who:"Jhoey David",   tel:"+5512981754011", local:"Comunidade", status:"imediata", concluido:true,
-    desc:"Arrumar as cadeiras do auditório comunidade." },
-  { id:7,  day:"Sex 01/05", time:"9h15",          who:"Giovani OC",     tel:"+5512997574857", local:"Nações",    status:"imediata", concluido:true,
-    desc:"Movimentação de 3 banquetas amarelas do Pitstop para o Talk." },
-  { id:8,  day:"Sex 01/05", time:"11h",           who:"Mari Camilo",    tel:"+5512982062718", local:"",          status:"imediata", concluido:true,
-    desc:"Levar duas cadeiras para o espaço videira." },
-  { id:9,  day:"Sex 01/05", time:"11h",           who:"Giovani OC",     tel:"+5512997574857", local:"Principal", status:"imediata", concluido:true,
-    desc:"Colocar e retirar do cenário os móveis." },
-  { id:10, day:"Sex 01/05", time:"12h",           who:"Nicole",         tel:"+5512988994185", local:"Comunidade",status:"imediata", concluido:true,
-    desc:"Subir 2 poltronas para o palco do comunidade." },
-  { id:11, day:"Sex 01/05", time:"12h",           who:"Nicole",         tel:"+5512988994185", local:"Principal", status:"imediata", concluido:true,
-    desc:"Levar 3 banquetas amarelas do Pitstop para o Principal." },
-  { id:12, day:"Sex 01/05", time:"13h",           who:"Allan",          tel:"+5512982641127", local:"Auditório Nações", status:"plan", concluido:false,
-    desc:"Desmontar tudo e voltar o auditório Nações ao normal, pós sessão da manhã." },
-  { id:13, day:"Sex 01/05", time:"15h30–16h30",   who:"Jhoey David",   tel:"+5512981754011", local:"",          status:"plan",     concluido:false,
-    desc:"Arrumar o auditório para a Sala Sobrenatural. Principal demanda: cadeiras. Voluntários envolvidos, mas precisam de apoio pela dinâmica da conf. Finalizar até 16h30." },
-  { id:14, day:"Sex 01/05", time:"~17h",          who:"Julia Sendretti",tel:"+5512982726046", local:"Comunidade",status:"plan",     concluido:false,
-    desc:"Levar arquibancadas que estarão em frente ao espelhado para o Comunidade." },
-  { id:15, day:"Sex 01/05", time:"18h50",         who:"Jhoey David",   tel:"+5512981754011", local:"",          status:"plan",     concluido:false,
-    desc:"Reorganizar o auditório para as 30 Semanas. Mexer nas cadeiras após a Sala Sobrenatural. Voluntários não darão conta sozinhos." },
-  { id:16, day:"Sex 01/05", time:"19h–20h",       who:"Gabriela Baroni",tel:"+5511977413420", local:"Colina",    status:"plan",     concluido:false,
-    desc:"Pegar as frutas da corrida na prefeitura, trazer para o espelhado e colocar nas mesas espalhadas pelos pontos na Colina (pontos a definir)." },
-  { id:17, day:"Sáb 02/05", time:"10h–11h30",     who:"Jhoey David",   tel:"+5512981754011", local:"",          status:"plan",     concluido:false,
-    desc:"Arrumar o auditório para a Sala Sobrenatural. Principal demanda: cadeiras. Voluntários envolvidos, mas precisam de apoio pela dinâmica da conf. Finalizar até 11h30." },
-  { id:18, day:"Sáb 02/05", time:"10h",           who:"Giovani OC",     tel:"+5512997574857", local:"Comunidade",status:"plan",     concluido:false,
-    desc:"Movimentação de móveis para Talk:",
-    bullets:["1 sofá — Sapinha (camarim)","2 poltronas — Salas ministeriais","1 mesinha baixa redonda — Sala do Marcão","1 mesinha baixa redonda — Sapinha (camarim)"] },
-  { id:19, day:"Sáb 02/05", time:"10h",           who:"Giovani OC",     tel:"+5512997574857", local:"Principal", status:"plan",     concluido:false,
-    desc:"Movimentação de móveis para Talk:",
-    bullets:["1 sofá — Sapinha (camarim)","2 poltronas — Salas ministeriais","1 mesinha — Sala do Marcão","1 mesinha — Camarim"] },
-  { id:20, day:"Sáb 02/05", time:"15h (ev. 16h)", who:"Thiago Silva",   tel:"+5512981909790", local:"",          status:"plan",     concluido:false,
-    desc:"Colocar mesas para jogos de cartas e tabuleiro, retirar cadeiras para liberar espaço. Deixar 4–5 fileiras de frente para o palco." },
-  { id:21, day:"Sáb 02/05", time:"19h",           who:"Jhoey David",   tel:"+5512981754011", local:"",          status:"plan",     concluido:false,
-    desc:"Arrumar as cadeiras do auditório. Voluntários estarão servindo na ministração da noite." },
+  {id:1,  day:"Qui 30/04",time:"15h+",         who:"Mari Camilo",   tel:"+55 12 98206-2718",local:"",          status:"plan",    concluido:true,  desc:"Styling/customização — 2 a 3 mesas com pelo menos 4 cadeiras cada. Demais itens já providenciados."},
+  {id:2,  day:"Qui 30/04",time:"15h+",         who:"Mari Camilo",   tel:"+55 12 98206-2718",local:"",          status:"plan",    concluido:true,  desc:"Stand Feminina — 1 mesa baixa (tipo hall) e 1 poltrona. Logo do Feminina já autorizada pela pastora Ester."},
+  {id:3,  day:"Qui 30/04",time:"16h",          who:"Renan Cenários",tel:"+55 12 99740-0926",local:"Espelhado", status:"imediata",concluido:true,  desc:"Levar as arquibancadas para a frente do espelhado."},
+  {id:4,  day:"Qui 30/04",time:"20h",          who:"Pr. Carlito",   tel:"Confidencial",     local:"Galeria",   status:"imediata",concluido:true,  desc:"Ligar os ventiladores da galeria."},
+  {id:5,  day:"Qui 30/04",time:"22h",          who:"Allan",         tel:"12982641127",      local:"Auditório Nações",status:"plan",concluido:true,  desc:"Montagem do auditório Nações para a Creative-SE. Arrumar Nações pós sessão Eleve Conference."},
+  {id:6,  day:"Qui 30/04",time:"22h",          who:"Jhoey David",   tel:"12981754011",      local:"Comunidade",status:"imediata",concluido:true,  desc:"Arrumar as cadeiras do auditório comunidade."},
+  {id:7,  day:"Sex 01/05",time:"9h15",         who:"Giovani OC",    tel:"+55 12 99757-4857",local:"Nações",    status:"imediata",concluido:true,  desc:"Movimentação de 3 banquetas amarelas do Pitstop para o Talk."},
+  {id:8,  day:"Sex 01/05",time:"11h",          who:"Mari Camilo",   tel:"+55 12 98206-2718",local:"",          status:"imediata",concluido:true,  desc:"Levar duas cadeiras para o espaço videira."},
+  {id:9,  day:"Sex 01/05",time:"11h",          who:"Giovani OC",    tel:"+55 12 99757-4857",local:"Principal", status:"imediata",concluido:true,  desc:"Colocar e retirar do cenário os móveis."},
+  {id:10, day:"Sex 01/05",time:"12h",          who:"Nicole",        tel:"+55 12 98899-4185",local:"Comunidade",status:"imediata",concluido:true,  desc:"Subir 2 poltronas para o palco do comunidade."},
+  {id:11, day:"Sex 01/05",time:"12h",          who:"Nicole",        tel:"+55 12 98899-4185",local:"Principal", status:"imediata",concluido:true,  desc:"Levar 3 banquetas amarelas do Pitstop para o Principal."},
+  {id:12, day:"Sex 01/05",time:"13h",          who:"Allan",         tel:"12982641127",      local:"Auditório Nações",status:"plan",concluido:true,  desc:"Desmontar tudo e voltar o auditório Nações ao normal, pós sessão da manhã."},
+  {id:13, day:"Sex 01/05",time:"15h30–16h30",  who:"Jhoey David",  tel:"12981754011",      local:"",          status:"plan",    concluido:false, desc:"Arrumar o auditório para a Sala Sobrenatural. Principal demanda: cadeiras. Voluntários envolvidos, mas precisam de apoio. Finalizar até 16h30."},
+  {id:14, day:"Sex 01/05",time:"~17h",         who:"Julia Sendretti",tel:"+55 12 98272-6046",local:"Comunidade",status:"plan",  concluido:false, desc:"Levar arquibancadas que estarão em frente ao espelhado para o Comunidade."},
+  {id:15, day:"Sex 01/05",time:"17h",          who:"Pedro Zanchet", tel:"+55 12 99111-9739",local:"",          status:"imediata",concluido:false, desc:"Auxiliar a montagem da estrutura para a corrida."},
+  {id:16, day:"Sex 01/05",time:"18h50",        who:"Jhoey David",  tel:"12981754011",      local:"",          status:"plan",    concluido:false, desc:"Reorganizar o auditório para as 30 Semanas. Mexer nas cadeiras após a Sala Sobrenatural. Voluntários não darão conta sozinhos."},
+  {id:17, day:"Sex 01/05",time:"19h–20h",      who:"Gabriela Baroni",tel:"+55 11 97741-3420",local:"Colina",  status:"plan",    concluido:false, desc:"Pegar as frutas da corrida na prefeitura, trazer para o espelhado e colocar nas mesas espalhadas pelos pontos na Colina."},
+  {id:18, day:"Sáb 02/05",time:"10h–11h30",    who:"Jhoey David",  tel:"12981754011",      local:"",          status:"plan",    concluido:false, desc:"Arrumar o auditório para a Sala Sobrenatural. Principal demanda: cadeiras. Voluntários envolvidos. Finalizar até 11h30."},
+  {id:19, day:"Sáb 02/05",time:"10h",          who:"Giovani OC",    tel:"+55 12 99757-4857",local:"Comunidade",status:"plan",   concluido:false, desc:"Movimentação de móveis para Talk:",
+    bullets:["1 sofá — Sapinha (camarim)","2 poltronas — Salas ministeriais","1 mesinha baixa redonda — Sala do Marcão","1 mesinha baixa redonda — Sapinha (camarim)"]},
+  {id:20, day:"Sáb 02/05",time:"10h",          who:"Giovani OC",    tel:"+55 12 99757-4857",local:"Principal", status:"plan",   concluido:false, desc:"Movimentação de móveis para Talk:",
+    bullets:["1 sofá — Sapinha (camarim)","2 poltronas — Salas ministeriais","1 mesinha — Sala do Marcão","1 mesinha — Camarim"]},
+  {id:21, day:"Sáb 02/05",time:"15h (ev. 16h)",who:"Thiago Silva",  tel:"+55 12 98190-9790",local:"",          status:"plan",   concluido:false, desc:"Colocar mesas para jogos de cartas e tabuleiro, retirar cadeiras. Deixar 4–5 fileiras de frente para o palco."},
+  {id:22, day:"Sáb 02/05",time:"19h",          who:"Jhoey David",  tel:"12981754011",      local:"",          status:"plan",   concluido:false, desc:"Arrumar as cadeiras do auditório. Voluntários estarão servindo na ministração da noite."},
 ];
- 
-const TOTAL = tasks.length;
- 
-// ── Controle de versão ─────────────────────────────────────────────
-const APP_VERSION = '2025-05-01-v5';
-if (localStorage.getItem('eleve_version') !== APP_VERSION) {
-  const oldRatings = localStorage.getItem('eleve_ratings');
-  localStorage.clear();
-  if (oldRatings) localStorage.setItem('eleve_ratings', oldRatings);
-  localStorage.setItem('eleve_version', APP_VERSION);
-}
-// ──────────────────────────────────────────────────────────────────
- 
-const storedDone = localStorage.getItem('eleve_done');
-let doneSet;
-if (storedDone === null) {
-  doneSet = new Set(tasks.filter(t => t.concluido).map(t => t.id));
-  localStorage.setItem('eleve_done', JSON.stringify([...doneSet]));
-} else {
-  doneSet = new Set(JSON.parse(storedDone));
-}
-const done    = doneSet;
-const ratings = JSON.parse(localStorage.getItem('eleve_ratings') || '{}');
-let openCard  = null;
-let hoverStar = {};
+
+// ── version ──
+const APP_VERSION = '2025-05-01-v7';
+if(localStorage.getItem('eleve_version')!==APP_VERSION){localStorage.clear();localStorage.setItem('eleve_version',APP_VERSION);}
+
+const TOTAL   = tasks.length;
+const doneIds = new Set(tasks.filter(t=>t.concluido).map(t=>t.id));
 let filter    = 'todos';
- 
-function saveDone()    { localStorage.setItem('eleve_done',    JSON.stringify([...done])); }
-function saveRatings() { localStorage.setItem('eleve_ratings', JSON.stringify(ratings)); }
- 
-function setFilter(f, btn) {
-  filter = f;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+let activeTab = 'pedidos';
+
+// ── TAB ──
+function showTab(tab, btn){
+  activeTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  openCard = null;
-  render();
+  document.getElementById('tab-pedidos').style.display = tab==='pedidos'?'block':'none';
+  document.getElementById('tab-dash').classList.toggle('active', tab==='dash');
+  if(tab==='dash') renderDash();
 }
- 
-function toggleCard(id) { openCard = openCard === id ? null : id; render(); }
- 
-function toggleDone(id) {
-  if (done.has(id)) done.delete(id); else done.add(id);
-  saveDone(); render();
+
+// ── FILTER ──
+function setFilter(f,btn){
+  filter=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderList();
 }
- 
-function setHoverStar(id, n) { hoverStar[id] = n; renderStars(id); }
-function clearHoverStar(id)  { hoverStar[id] = 0; renderStars(id); }
- 
-function pickStar(id, n) {
-  if (!ratings[id]) ratings[id] = { stars:0, comment:'' };
-  ratings[id].stars = n;
-  hoverStar[id] = 0;
-  renderStars(id);
-  const el = document.getElementById('saved-' + id);
-  if (el) el.classList.remove('show');
+
+// ── INDICATORS ──
+function renderIndicators(){
+  const concluido = doneIds.size;
+  const pendente  = TOTAL - concluido;
+  const imediatas = tasks.filter(t=>t.status==='imediata'&&!doneIds.has(t.id)).length;
+  document.getElementById('indicators').innerHTML=`
+    <div class="ind-card"><div class="ind-value">${TOTAL}</div><div class="ind-label">Total</div></div>
+    <div class="ind-card green"><div class="ind-value">${concluido}</div><div class="ind-label">Concluídos</div></div>
+    <div class="ind-card orange"><div class="ind-value">${pendente}</div><div class="ind-label">Pendentes</div></div>
+    <div class="ind-card amber"><div class="ind-value">${imediatas}</div><div class="ind-label">⚡ Abertas</div></div>`;
 }
- 
-function renderStars(id) {
-  const c = document.getElementById('stars-' + id);
-  if (!c) return;
-  const saved  = (ratings[id] && ratings[id].stars) || 0;
-  const active = hoverStar[id] || saved;
-  let h = '';
-  for (let i = 1; i <= 5; i++) {
-    h += `<span class="star${i <= active ? ' lit' : ''}"
-      onmouseenter="setHoverStar(${id},${i})"
-      onmouseleave="clearHoverStar(${id})"
-      ontouchstart="event.preventDefault();pickStar(${id},${i})"
-      onclick="pickStar(${id},${i})">★</span>`;
-  }
-  c.innerHTML = h;
-}
- 
-function saveRating(id) {
-  const ta = document.getElementById('comment-' + id);
-  if (!ratings[id]) ratings[id] = { stars:0, comment:'' };
-  ratings[id].comment = ta ? ta.value.trim() : '';
-  saveRatings();
-  const el = document.getElementById('saved-' + id);
-  if (el) { el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 2500); }
-}
- 
-function render() {
+
+// ── LIST ──
+function renderList(){
   let filtered;
-  if      (filter === 'imediata') filtered = tasks.filter(t => t.status === 'imediata');
-  else if (filter === 'pendente') filtered = tasks.filter(t => !done.has(t.id));
-  else if (filter === 'todos')    filtered = tasks;
-  else                            filtered = tasks.filter(t => t.day === filter);
- 
-  const days = [...new Set(filtered.map(t => t.day))];
-  let html = '';
- 
-  if (!filtered.length) {
-    html = '<div class="empty">Nenhum pedido nesta categoria.</div>';
-  } else {
-    days.forEach(day => {
-      const dt = filtered.filter(t => t.day === day);
-      html += `<div class="day-group"><div class="day-label">${day}</div>`;
-      dt.forEach((t, i) => {
-        const isDone  = done.has(t.id);
-        const isOpen  = openCard === t.id;
-        const isImed  = t.status === 'imediata';
-        const short   = t.desc.length > 60 ? t.desc.slice(0,60)+'…' : t.desc;
-        const r       = ratings[t.id];
-        const hasStar = r && r.stars > 0;
-        const starBadge = hasStar
-          ? `<span style="font-size:12px;color:${isImed?'#C47500':'#D42B1E'};letter-spacing:1px">${'★'.repeat(r.stars)}</span>`
-          : '';
- 
-        const bulletsHTML = t.bullets
-          ? `<ul class="desc-list">${t.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>` : '';
- 
-        const statusTag = isImed
-          ? `<span class="tag tag-imediata">⚡ Imediata</span>`
-          : `<span class="tag tag-plan">📅 Planejado</span>`;
- 
-        const doneTag = isDone
-          ? `<span class="tag tag-concluido">✅ Concluído</span>`
-          : '';
- 
-        const telLink = t.tel === 'Confidencial'
-          ? `<span class="meta-val">Confidencial</span>`
-          : `<span class="meta-val"><a href="tel:${t.tel}">${t.tel}</a></span>`;
- 
-        const callBtns = t.tel === 'Confidencial' ? '' :
-          `<a class="btn btn-call" href="tel:${t.tel}">Ligar</a>
-           <a class="btn btn-call" href="https://wa.me/${t.tel}">Zap</a>`;
- 
-        html += `
-        <div class="card${isDone?' done':''}${isImed?' imediata':''}" style="animation-delay:${i*0.04}s">
-          <div class="card-main" onclick="toggleCard(${t.id})">
+  if      (filter==='imediata') filtered=tasks.filter(t=>t.status==='imediata');
+  else if (filter==='pendente') filtered=tasks.filter(t=>!doneIds.has(t.id));
+  else if (filter==='concluido')filtered=tasks.filter(t=>doneIds.has(t.id));
+  else if (filter==='todos')    filtered=tasks;
+  else                          filtered=tasks.filter(t=>t.day===filter);
+
+  const days=[...new Set(filtered.map(t=>t.day))];
+  let html='';
+  if(!filtered.length){html='<div class="empty">Nenhum pedido nesta categoria.</div>';}
+  else{
+    days.forEach(day=>{
+      const dt=filtered.filter(t=>t.day===day);
+      html+=`<div class="day-group"><div class="day-label">${day}</div>`;
+      dt.forEach((t,i)=>{
+        const isDone=doneIds.has(t.id), isImed=t.status==='imediata';
+        const bHTML=t.bullets?`<ul class="desc-list">${t.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>`:'';
+        const stTag=isImed?`<span class="tag tag-imediata">⚡ Imediata</span>`:`<span class="tag tag-plan">📅 Planejado</span>`;
+        const dTag=isDone?`<span class="tag tag-concluido">✅ Concluído</span>`:'';
+        const telTag=t.tel!=='Confidencial'?`<span class="tag tag-tel">📞 ${t.tel}</span>`:'';
+        html+=`<div class="card${isDone?' done':''}${isImed?' imediata':''}" style="animation-delay:${i*.03}s">
+          <div class="card-body">
             <div class="card-row1">
               <span class="card-num">#${String(t.id).padStart(2,'0')}</span>
-              <span class="card-title">${isOpen ? t.desc : short}</span>
+              <span class="card-title">${t.desc}</span>
               <span class="card-time">${t.time}</span>
             </div>
-            <div class="card-tags">
-              ${statusTag}
-              ${doneTag}
-              <span class="tag tag-who">${t.who}</span>
-              ${t.local ? `<span class="tag tag-local">${t.local}</span>` : ''}
-              ${!isOpen ? starBadge : ''}
-            </div>
-          </div>
-          <div class="card-detail${isOpen?' open':''}">
-            <div class="detail-inner">
-              <div class="detail-meta">
-                <span class="meta-lbl">Horário</span><span class="meta-val">${t.time}</span>
-                ${t.local?`<span class="meta-lbl">Local</span><span class="meta-val">${t.local}</span>`:''}
-                <span class="meta-lbl">Tel</span>${telLink}
-              </div>
-              ${bulletsHTML ? `<div style="margin-bottom:12px">${bulletsHTML}</div>` : ''}
-              <div class="action-row">
-                <button class="btn ${isDone?'btn-undone':'btn-done'}" onclick="toggleDone(${t.id})">
-                  ${isDone ? '↩ Reabrir' : '✓ Concluído'}
-                </button>
-                ${callBtns}
-              </div>
-            </div>
-            <div class="rating-section">
-              <span class="rating-label">Avaliação do atendimento</span>
-              <div class="stars" id="stars-${t.id}"></div>
-              <textarea class="rating-comment" id="comment-${t.id}" rows="2"
-                placeholder="Deixe um comentário (opcional)...">${r&&r.comment?r.comment:''}</textarea><br>
-              <button class="btn-save-rating" onclick="saveRating(${t.id})">Salvar avaliação</button>
-              <div class="rating-saved" id="saved-${t.id}">✓ Avaliação salva!</div>
-            </div>
-          </div>
-        </div>`;
+            ${bHTML}
+            <div class="card-tags">${stTag}${dTag}<span class="tag tag-who">${t.who}</span>${t.local?`<span class="tag tag-local">${t.local}</span>`:''}${telTag}</div>
+          </div></div>`;
       });
-      html += '</div>';
+      html+='</div>';
     });
   }
- 
-  document.getElementById('taskList').innerHTML = html;
-  tasks.forEach(t => { if (openCard === t.id) renderStars(t.id); });
- 
-  const pct = Math.round((done.size / TOTAL) * 100);
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressLabel').textContent = `${done.size}/${TOTAL}`;
+  document.getElementById('taskList').innerHTML=html;
 }
- 
-render();
+
+// ── DASHBOARD ──
+function renderDash(){
+  renderDonut();
+  renderDayBars();
+  renderTypeBars();
+  renderPersonBars();
+  renderPersonDetail();
+}
+
+function renderDonut(){
+  const done=doneIds.size, pend=TOTAL-done;
+  const pct=done/TOTAL;
+  const r=38, cx=55, cy=55, circ=2*Math.PI*r;
+  const dashDone=circ*pct, dashPend=circ*(1-pct);
+  document.getElementById('donutSvg').innerHTML=`
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(0,0,0,.1)" stroke-width="14"/>
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#6EE89A" stroke-width="14"
+      stroke-dasharray="${dashDone} ${circ}" stroke-dashoffset="${circ*.25}" stroke-linecap="round"/>
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#D42B1E" stroke-width="14"
+      stroke-dasharray="${dashPend} ${circ}" stroke-dashoffset="${circ*.25-dashDone}" stroke-linecap="round"/>
+    <text x="${cx}" y="${cy-6}" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="20" fill="#1A0800">${Math.round(pct*100)}%</text>
+    <text x="${cx}" y="${cy+12}" text-anchor="middle" font-family="Barlow Condensed" font-size="11" fill="#7A6050">concluído</text>`;
+
+  const imedTotal=tasks.filter(t=>t.status==='imediata').length;
+  const imedDone=tasks.filter(t=>t.status==='imediata'&&doneIds.has(t.id)).length;
+  document.getElementById('donutLegend').innerHTML=`
+    <div class="legend-item"><div class="legend-dot" style="background:#6EE89A"></div><span class="legend-label">Concluídos</span><span class="legend-val">${done}</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#D42B1E"></div><span class="legend-label">Pendentes</span><span class="legend-val">${pend}</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#FFD066"></div><span class="legend-label">⚡ Imediatas</span><span class="legend-val">${imedTotal}</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#C47500"></div><span class="legend-label">⚡ Imed. abertas</span><span class="legend-val">${imedTotal-imedDone}</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(26,107,50,.7)"></div><span class="legend-label">📅 Planejadas</span><span class="legend-val">${tasks.filter(t=>t.status==='plan').length}</span></div>`;
+}
+
+function barRow(label,done,total,colorDone,colorPend){
+  const pctD=total?done/total:0, pctP=total?(total-done)/total:0;
+  return `<div class="person-row">
+    <div class="person-name">${label}<span>${done}/${total} concluídos</span></div>
+    <div class="bar-track">
+      <div class="bar-seg" style="width:${pctD*100}%;background:${colorDone}"></div>
+      <div class="bar-seg" style="width:${pctP*100}%;background:${colorPend}"></div>
+    </div></div>`;
+}
+
+function renderDayBars(){
+  const days=['Qui 30/04','Sex 01/05','Sáb 02/05'];
+  let h='';
+  days.forEach(d=>{
+    const t=tasks.filter(x=>x.day===d);
+    const dn=t.filter(x=>doneIds.has(x.id)).length;
+    h+=barRow(d,dn,t.length,'#6EE89A','rgba(212,43,30,.25)');
+  });
+  document.getElementById('dayBars').innerHTML=h;
+}
+
+function renderTypeBars(){
+  const plan=tasks.filter(t=>t.status==='plan');
+  const imed=tasks.filter(t=>t.status==='imediata');
+  const planDone=plan.filter(t=>doneIds.has(t.id)).length;
+  const imedDone=imed.filter(t=>doneIds.has(t.id)).length;
+  document.getElementById('typeBars').innerHTML=
+    barRow('📅 Planejadas',planDone,plan.length,'#6EE89A','rgba(26,107,50,.15)')+
+    barRow('⚡ Imediatas', imedDone,imed.length,'#FFD066','rgba(196,117,0,.2)');
+}
+
+function renderPersonBars(){
+  const people=[...new Set(tasks.map(t=>t.who))];
+  const max=Math.max(...people.map(p=>tasks.filter(t=>t.who===p).length));
+  let h='';
+  people.forEach(p=>{
+    const pt=tasks.filter(t=>t.who===p);
+    const pd=pt.filter(t=>doneIds.has(t.id)).length;
+    h+=barRow(p,pd,pt.length,'#6EE89A','rgba(212,43,30,.22)');
+  });
+  document.getElementById('personBars').innerHTML=h;
+}
+
+function renderPersonDetail(){
+  const people=[...new Set(tasks.map(t=>t.who))];
+  let h='';
+  people.forEach(p=>{
+    const pt   =tasks.filter(t=>t.who===p);
+    const pd   =pt.filter(t=>doneIds.has(t.id)).length;
+    const pp   =pt.length-pd;
+    const pimed=pt.filter(t=>t.status==='imediata').length;
+    const pplan=pt.filter(t=>t.status==='plan').length;
+    const pct  =pt.length?Math.round(pd/pt.length*100):0;
+    const barD =pt.length?pd/pt.length*100:0;
+    const barP =100-barD;
+    h+=`<div class="pdc">
+      <div class="pdc-name">${p}</div>
+      <div class="pdc-stats">
+        <span class="pdc-stat total">${pt.length} pedidos</span>
+        <span class="pdc-stat done">✅ ${pd} ok</span>
+        <span class="pdc-stat pending">🔲 ${pp} pend.</span>
+        <span class="pdc-stat imed">⚡ ${pimed} imed.</span>
+        <span class="pdc-stat plan">📅 ${pplan} plan.</span>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">${pct}% concluído</div>
+      <div class="pdc-bar-track">
+        <div class="bar-seg" style="width:${barD}%;background:#6EE89A;"></div>
+        <div class="bar-seg" style="width:${barP}%;background:rgba(212,43,30,.2);"></div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('personDetail').innerHTML=h;
+}
+
+// ── INIT ──
+renderList();
 </script>
 </body>
 </html>
