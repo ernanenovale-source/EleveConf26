@@ -5,6 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Runners — ELV CONF 26</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, set, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+  // ============================================================
+  // 🔧 CONFIGURE AQUI com os dados do seu projeto Firebase
+  // ============================================================
+  const firebaseConfig = {
+    apiKey:            "COLE_AQUI_apiKey",
+    authDomain:        "COLE_AQUI_authDomain",
+    databaseURL:       "COLE_AQUI_databaseURL",
+    projectId:         "COLE_AQUI_projectId",
+    storageBucket:     "COLE_AQUI_storageBucket",
+    messagingSenderId: "COLE_AQUI_messagingSenderId",
+    appId:             "COLE_AQUI_appId"
+  };
+  // ============================================================
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getDatabase(app);
+
+  const doneRef    = ref(db, 'eleve_conf/done');
+  const ratingsRef = ref(db, 'eleve_conf/ratings');
+
+  // Expõe funções para o código global
+  window._fb = {
+    saveDone: (doneArr) => set(doneRef, doneArr),
+    saveRating: (id, data) => update(ref(db, `eleve_conf/ratings/${id}`), data),
+    onDone: (cb) => onValue(doneRef, snap => cb(snap.val() || [])),
+    onRatings: (cb) => onValue(ratingsRef, snap => cb(snap.val() || {})),
+  };
+
+  // Sinaliza que o Firebase está pronto
+  window.dispatchEvent(new Event('firebase-ready'));
+</script>
+
 <style>
 :root {
   --orange: #F5A300;
@@ -30,6 +68,27 @@ body {
   min-height: 100vh;
   padding-bottom: 3rem;
 }
+
+/* ---- Sync indicator ---- */
+#syncBadge {
+  position: fixed;
+  bottom: 14px;
+  right: 14px;
+  z-index: 99;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 0.07em;
+  padding: 5px 12px;
+  border-radius: 99px;
+  background: rgba(0,0,0,0.72);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+#syncBadge.show { opacity: 1; }
 
 .app-header {
   position: sticky;
@@ -220,13 +279,13 @@ body {
   color: #1A0800;
 }
 .card-time {
-  font-family: 'Barlow Condensed', sans-serif;
   font-size: 14px;
   font-weight: 900;
   font-style: italic;
   color: var(--red);
   flex-shrink: 0;
   letter-spacing: 0.02em;
+  font-family: 'Barlow Condensed', sans-serif;
 }
 .card-tags {
   display: flex;
@@ -346,7 +405,6 @@ body {
   margin-bottom: 8px;
 }
 .rating-comment:focus { border-color: var(--red); }
-.rating-comment::placeholder { color: rgba(26,8,0,0.32); }
 
 .btn-save-rating {
   font-family: 'Barlow Condensed', sans-serif;
@@ -390,6 +448,8 @@ body {
 </head>
 <body>
 
+<div id="syncBadge">🔄 Sincronizando…</div>
+
 <div class="app-header">
   <div class="header-eyebrow">
     <span class="brand">ELV CONF 26 · Runners</span>
@@ -432,15 +492,66 @@ const tasks = [
 ];
 
 const TOTAL = tasks.length;
-const done    = new Set(JSON.parse(localStorage.getItem('eleve_done') || '[]'));
-const ratings = JSON.parse(localStorage.getItem('eleve_ratings') || '{}');
+let done    = new Set();
+let ratings = {};
 let openCard  = null;
 let hoverStar = {};
 let filter    = 'todos';
+let fbReady   = false;
 
-function saveDone()    { localStorage.setItem('eleve_done',    JSON.stringify([...done])); }
-function saveRatings() { localStorage.setItem('eleve_ratings', JSON.stringify(ratings)); }
+// ---- Sync badge ----
+let syncTimer;
+function showSync() {
+  const b = document.getElementById('syncBadge');
+  b.classList.add('show');
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(() => b.classList.remove('show'), 1800);
+}
 
+// ---- Save functions (Firebase when ready, fallback localStorage) ----
+function saveDone() {
+  if (fbReady) {
+    window._fb.saveDone([...done]);
+    showSync();
+  } else {
+    localStorage.setItem('eleve_done', JSON.stringify([...done]));
+  }
+}
+
+function saveRatings(id) {
+  if (fbReady) {
+    window._fb.saveRating(id, ratings[id]);
+    showSync();
+  } else {
+    localStorage.setItem('eleve_ratings', JSON.stringify(ratings));
+  }
+}
+
+// ---- Firebase ready: subscribe to real-time updates ----
+window.addEventListener('firebase-ready', () => {
+  fbReady = true;
+
+  window._fb.onDone(arr => {
+    done = new Set(arr);
+    render();
+  });
+
+  window._fb.onRatings(obj => {
+    ratings = obj || {};
+    render();
+  });
+});
+
+// ---- Fallback: load from localStorage while Firebase connects ----
+(function loadLocal() {
+  const d = localStorage.getItem('eleve_done');
+  const r = localStorage.getItem('eleve_ratings');
+  if (d) done    = new Set(JSON.parse(d));
+  if (r) ratings = JSON.parse(r);
+  render();
+})();
+
+// ---- UI logic ----
 function setFilter(f, btn) {
   filter = f;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -453,7 +564,8 @@ function toggleCard(id) { openCard = openCard === id ? null : id; render(); }
 
 function toggleDone(id) {
   if (done.has(id)) done.delete(id); else done.add(id);
-  saveDone(); render();
+  saveDone();
+  render();
 }
 
 function setHoverStar(id, n) { hoverStar[id] = n; renderStars(id); }
@@ -488,7 +600,7 @@ function saveRating(id) {
   const ta = document.getElementById('comment-' + id);
   if (!ratings[id]) ratings[id] = { stars: 0, comment: '' };
   ratings[id].comment = ta ? ta.value.trim() : '';
-  saveRatings();
+  saveRatings(id);
   const el = document.getElementById('saved-' + id);
   if (el) { el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 2500); }
 }
