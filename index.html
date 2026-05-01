@@ -31,154 +31,129 @@ body {
 
 /* HEADER */
 .app-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
+  position: sticky; top: 0; z-index: 20;
   background: var(--red);
   padding: 0.875rem 1.25rem;
   box-shadow: 0 2px 0 var(--red-dark);
 }
-.header-eyebrow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1px;
-}
+.header-eyebrow { display:flex; align-items:center; justify-content:space-between; margin-bottom:1px; }
 .brand {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900; font-style: italic;
-  font-size: 12px; letter-spacing: 0.1em;
-  color: var(--orange); text-transform: uppercase;
+  font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
+  font-size:12px; letter-spacing:0.1em; color:var(--orange); text-transform:uppercase;
 }
 .verse-tag {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
-  text-transform: uppercase; color: rgba(255,255,255,0.45);
+  font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:700;
+  letter-spacing:0.06em; text-transform:uppercase; color:rgba(255,255,255,0.45);
 }
 .header-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 56px; font-weight: 900; font-style: italic;
-  text-transform: uppercase; line-height: 0.88;
-  color: var(--text-light); text-shadow: 3px 3px 0 var(--red-dark);
+  font-family:'Barlow Condensed',sans-serif; font-size:56px; font-weight:900;
+  font-style:italic; text-transform:uppercase; line-height:0.88;
+  color:var(--text-light); text-shadow:3px 3px 0 var(--red-dark);
 }
 .header-sub {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
-  text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 3px;
+  font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700;
+  letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.5); margin-top:3px;
 }
-.progress-wrap { margin-top: 10px; display: flex; align-items: center; gap: 10px; }
-.progress-bar-bg {
-  flex: 1; height: 4px; background: rgba(0,0,0,0.28);
-  border-radius: 99px; overflow: hidden;
-}
-.progress-bar-fill {
-  height: 100%; background: var(--orange);
-  border-radius: 99px; transition: width 0.4s ease; width: 0%;
-}
+.progress-wrap { margin-top:10px; display:flex; align-items:center; gap:10px; }
+.progress-bar-bg { flex:1; height:4px; background:rgba(0,0,0,0.28); border-radius:99px; overflow:hidden; }
+.progress-bar-fill { height:100%; background:var(--orange); border-radius:99px; transition:width 0.4s ease; width:0%; }
 .progress-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 14px; font-weight: 900; font-style: italic;
-  color: var(--orange); min-width: 38px; text-align: right;
+  font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:900;
+  font-style:italic; color:var(--orange); min-width:38px; text-align:right;
 }
 
 /* FILTER */
-.filter-row {
-  display: flex; gap: 6px; padding: 0.75rem 1rem;
-  overflow-x: auto; scrollbar-width: none;
-}
-.filter-row::-webkit-scrollbar { display: none; }
+.filter-row { display:flex; gap:6px; padding:0.75rem 1rem; overflow-x:auto; scrollbar-width:none; }
+.filter-row::-webkit-scrollbar { display:none; }
 .filter-btn {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px; font-weight: 800; font-style: italic;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  padding: 6px 16px; border-radius: 3px;
-  border: 2px solid rgba(0,0,0,0.18);
-  background: rgba(255,255,255,0.25);
-  color: var(--text-dark); cursor: pointer; white-space: nowrap;
-  transition: all 0.15s; -webkit-tap-highlight-color: transparent;
+  font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:800; font-style:italic;
+  letter-spacing:0.06em; text-transform:uppercase; padding:6px 16px; border-radius:3px;
+  border:2px solid rgba(0,0,0,0.18); background:rgba(255,255,255,0.25);
+  color:var(--text-dark); cursor:pointer; white-space:nowrap;
+  transition:all 0.15s; -webkit-tap-highlight-color:transparent;
 }
-.filter-btn.active { background: var(--red); color: #fff; border-color: var(--red-dark); }
+.filter-btn.active { background:var(--red); color:#fff; border-color:var(--red-dark); }
 
 /* DAY GROUP */
-.day-group { padding: 0 1rem; margin-top: 0.5rem; }
+.day-group { padding:0 1rem; margin-top:0.5rem; }
 .day-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 14px; font-weight: 900; font-style: italic;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--red); padding: 0.625rem 0 0.4rem;
-  display: flex; align-items: center; gap: 8px;
+  font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:900;
+  font-style:italic; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--red); padding:0.625rem 0 0.4rem;
+  display:flex; align-items:center; gap:8px;
 }
 .day-label::after { content:''; flex:1; height:2px; background:rgba(0,0,0,0.15); border-radius:2px; }
 
 /* CARD */
 .card {
-  background: rgba(255,255,255,0.9);
-  border-radius: var(--radius-lg);
-  margin-bottom: 0.5rem; overflow: hidden;
-  transition: opacity 0.2s, transform 0.12s;
-  animation: fadeUp 0.22s ease both;
-  box-shadow: 2px 3px 0 rgba(0,0,0,0.16);
+  background:rgba(255,255,255,0.9); border-radius:var(--radius-lg);
+  margin-bottom:0.5rem; overflow:hidden;
+  transition:opacity 0.2s, transform 0.12s;
+  animation:fadeUp 0.22s ease both;
+  box-shadow:2px 3px 0 rgba(0,0,0,0.16);
 }
-.card:active { transform: scale(0.985); }
+.card:active { transform:scale(0.985); }
 @keyframes fadeUp {
   from { opacity:0; transform:translateY(8px); }
   to   { opacity:1; transform:translateY(0); }
 }
-.card.done { opacity: 0.32; }
-.card.done .card-title { text-decoration: line-through; }
+
+/* done: subtle dim, NO strikethrough */
+.card.done { opacity:0.45; }
 
 .card-main {
-  padding: 0.875rem 1rem 0.875rem 1.1rem;
-  cursor: pointer; -webkit-tap-highlight-color: transparent;
-  user-select: none; border-left: 5px solid var(--red);
+  padding:0.875rem 1rem 0.875rem 1.1rem;
+  cursor:pointer; -webkit-tap-highlight-color:transparent;
+  user-select:none; border-left:5px solid var(--red);
 }
-.card.imediata .card-main { border-left-color: #C47500; }
-.card.done .card-main     { border-left-color: rgba(0,0,0,0.18); }
+.card.imediata .card-main { border-left-color:#C47500; }
+.card.done .card-main     { border-left-color:rgba(31,122,58,0.6); }
 
 .card-row1 { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; margin-bottom:5px; }
 .card-num {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px; font-weight: 900; font-style: italic;
-  color: #fff; background: var(--red);
-  padding: 1px 7px; border-radius: 3px; flex-shrink: 0; margin-top: 1px;
+  font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:900; font-style:italic;
+  color:#fff; background:var(--red); padding:1px 7px; border-radius:3px;
+  flex-shrink:0; margin-top:1px;
 }
-.card.imediata .card-num { background: #C47500; }
+.card.imediata .card-num { background:#C47500; }
+.card.done .card-num     { background:rgba(31,122,58,0.7); }
 
 .card-title { font-size:14px; font-weight:600; line-height:1.4; flex:1; color:#1A0800; }
 .card-time {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 14px; font-weight: 900; font-style: italic;
-  color: var(--red); flex-shrink: 0;
+  font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:900;
+  font-style:italic; color:var(--red); flex-shrink:0;
 }
-.card.imediata .card-time { color: #C47500; }
+.card.imediata .card-time { color:#C47500; }
+.card.done .card-time     { color:rgba(31,122,58,0.8); }
 
 .card-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:5px; align-items:center; }
 .tag {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px; font-weight: 800; font-style: italic;
-  letter-spacing: 0.05em; text-transform: uppercase;
-  padding: 2px 8px; border-radius: 3px;
+  font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:800;
+  font-style:italic; letter-spacing:0.05em; text-transform:uppercase;
+  padding:2px 8px; border-radius:3px;
 }
-.tag-who      { background: rgba(0,0,0,0.07); color: rgba(26,8,0,0.6); }
-.tag-local    { background: var(--orange); color: var(--red-dark); }
-.tag-plan     { background: rgba(31,122,58,0.12); color: #1F7A3A; }
-.tag-imediata { background: rgba(196,117,0,0.14); color: #7A4800; animation: pulse 1.6s ease-in-out infinite; }
-.tag-concluido{ background: rgba(31,122,58,0.18); color: #1F7A3A; }
+.tag-who       { background:rgba(0,0,0,0.07); color:rgba(26,8,0,0.6); }
+.tag-local     { background:var(--orange); color:var(--red-dark); }
+.tag-plan      { background:rgba(31,122,58,0.12); color:#1F7A3A; }
+.tag-imediata  { background:rgba(196,117,0,0.14); color:#7A4800; animation:pulse 1.6s ease-in-out infinite; }
+.tag-concluido {
+  background:rgba(31,122,58,0.85); color:#fff;
+  font-size:12px; padding:3px 10px; border-radius:3px;
+}
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
 
 /* DETAIL */
 .card-detail { max-height:0; overflow:hidden; transition:max-height 0.35s ease; }
-.card-detail.open { max-height: 820px; }
+.card-detail.open { max-height:820px; }
 
 .detail-inner {
-  border-top: 1px solid rgba(0,0,0,0.07);
-  padding: 0.875rem 1rem; background: rgba(245,163,0,0.05);
+  border-top:1px solid rgba(0,0,0,0.07);
+  padding:0.875rem 1rem; background:rgba(245,163,0,0.05);
 }
 .detail-meta { display:grid; grid-template-columns:auto 1fr; gap:5px 12px; margin-bottom:12px; }
 .meta-lbl {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px; font-weight: 800; font-style: italic;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:800;
+  font-style:italic; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted);
 }
 .meta-val { color:#1A0800; font-weight:500; font-size:13px; }
 .meta-val a { color:var(--red); text-decoration:none; font-weight:700; }
@@ -187,67 +162,59 @@ body {
 
 .action-row { display:flex; gap:6px; flex-wrap:wrap; }
 .btn {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px; font-weight: 800; font-style: italic;
-  letter-spacing: 0.07em; text-transform: uppercase;
-  padding: 7px 16px; border-radius: var(--radius);
-  border: 2px solid rgba(0,0,0,0.12);
-  background: rgba(0,0,0,0.06); color: #1A0800;
-  cursor: pointer; transition: opacity 0.15s;
-  -webkit-tap-highlight-color: transparent;
-  text-decoration: none; display: inline-block;
+  font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:800;
+  font-style:italic; letter-spacing:0.07em; text-transform:uppercase;
+  padding:7px 16px; border-radius:var(--radius);
+  border:2px solid rgba(0,0,0,0.12); background:rgba(0,0,0,0.06);
+  color:#1A0800; cursor:pointer; transition:opacity 0.15s;
+  -webkit-tap-highlight-color:transparent; text-decoration:none; display:inline-block;
 }
-.btn:active { opacity: 0.75; }
-.btn-done   { background: var(--green-bg); color: var(--green); border-color: rgba(31,122,58,0.22); }
-.btn-undone { background: rgba(212,43,30,0.1); color: var(--red); border-color: rgba(212,43,30,0.22); }
-.btn-call   { background: rgba(0,0,0,0.05); color: rgba(26,8,0,0.6); }
+.btn:active { opacity:0.75; }
+.btn-done   { background:var(--green-bg); color:var(--green); border-color:rgba(31,122,58,0.22); }
+.btn-undone { background:rgba(212,43,30,0.1); color:var(--red); border-color:rgba(212,43,30,0.22); }
+.btn-call   { background:rgba(0,0,0,0.05); color:rgba(26,8,0,0.6); }
 
 /* RATING */
 .rating-section {
-  border-top: 2px dashed rgba(0,0,0,0.1);
-  padding: 0.875rem 1rem; background: rgba(0,0,0,0.025);
+  border-top:2px dashed rgba(0,0,0,0.1);
+  padding:0.875rem 1rem; background:rgba(0,0,0,0.025);
 }
 .rating-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px; font-weight: 900; font-style: italic;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 8px; display: block;
+  font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:900;
+  font-style:italic; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:8px; display:block;
 }
 .stars { display:flex; gap:3px; margin-bottom:10px; }
 .star {
-  font-size: 32px; cursor: pointer; color: rgba(0,0,0,0.13);
-  transition: color 0.1s, transform 0.1s; line-height:1;
-  -webkit-tap-highlight-color: transparent; user-select:none;
+  font-size:32px; cursor:pointer; color:rgba(0,0,0,0.13);
+  transition:color 0.1s, transform 0.1s; line-height:1;
+  -webkit-tap-highlight-color:transparent; user-select:none;
 }
-.star.lit { color: var(--red); }
-.star:active { transform: scale(1.3); }
-
+.star.lit { color:var(--red); }
+.star:active { transform:scale(1.3); }
 .rating-comment {
-  width:100%; font-family:'Barlow',sans-serif; font-size:13px;
-  color:#1A0800; background:rgba(255,255,255,0.75);
-  border:2px solid rgba(0,0,0,0.13); border-radius:var(--radius);
-  padding:8px 10px; resize:none; outline:none;
+  width:100%; font-family:'Barlow',sans-serif; font-size:13px; color:#1A0800;
+  background:rgba(255,255,255,0.75); border:2px solid rgba(0,0,0,0.13);
+  border-radius:var(--radius); padding:8px 10px; resize:none; outline:none;
   transition:border-color 0.15s; margin-bottom:8px;
 }
-.rating-comment:focus { border-color: var(--red); }
-.rating-comment::placeholder { color: rgba(26,8,0,0.32); }
-
+.rating-comment:focus { border-color:var(--red); }
+.rating-comment::placeholder { color:rgba(26,8,0,0.32); }
 .btn-save-rating {
-  font-family:'Barlow Condensed',sans-serif; font-size:14px;
-  font-weight:900; font-style:italic; letter-spacing:0.1em;
-  text-transform:uppercase; padding:8px 22px; border-radius:var(--radius);
-  border:none; background:var(--red); color:#fff; cursor:pointer;
+  font-family:'Barlow Condensed',sans-serif; font-size:14px; font-weight:900;
+  font-style:italic; letter-spacing:0.1em; text-transform:uppercase;
+  padding:8px 22px; border-radius:var(--radius); border:none;
+  background:var(--red); color:#fff; cursor:pointer;
   box-shadow:2px 2px 0 var(--red-dark); transition:opacity 0.15s;
   -webkit-tap-highlight-color:transparent; margin-bottom:0.875rem;
 }
 .btn-save-rating:active { opacity:0.82; transform:translate(1px,1px); box-shadow:1px 1px 0 var(--red-dark); }
-
 .rating-saved {
-  font-family:'Barlow Condensed',sans-serif; font-size:13px;
-  font-weight:800; font-style:italic; color:var(--green);
-  margin-bottom:0.875rem; display:none;
+  font-family:'Barlow Condensed',sans-serif; font-size:13px; font-weight:800;
+  font-style:italic; color:var(--green); margin-bottom:0.875rem; display:none;
 }
 .rating-saved.show { display:block; }
+
 .empty { text-align:center; padding:3rem 1rem; color:var(--muted); font-size:14px; }
 </style>
 </head>
@@ -262,7 +229,7 @@ body {
   <div class="header-sub">30 abr – 02 mai · equipe de apoio</div>
   <div class="progress-wrap">
     <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
-    <span class="progress-label" id="progressLabel">0/17</span>
+    <span class="progress-label" id="progressLabel">0/21</span>
   </div>
 </div>
 
@@ -272,55 +239,63 @@ body {
   <button class="filter-btn" onclick="setFilter('Sex 01/05',this)">Sex 01/05</button>
   <button class="filter-btn" onclick="setFilter('Sáb 02/05',this)">Sáb 02/05</button>
   <button class="filter-btn" onclick="setFilter('imediata',this)">⚡ Imediatas</button>
+  <button class="filter-btn" onclick="setFilter('pendente',this)">🔲 Pendentes</button>
 </div>
 
 <div id="taskList"></div>
 
 <script>
 const tasks = [
-  { id:1,  day:"Qui 30/04", time:"15h+",           who:"Mari Camilo",    tel:"+5512982062718", local:"",                      status:"plan",     concluido:true,
+  { id:1,  day:"Qui 30/04", time:"15h+",          who:"Mari Camilo",    tel:"+5512982062718", local:"",          status:"plan",     concluido:true,
     desc:"Styling/customização — 2 a 3 mesas com pelo menos 4 cadeiras cada. Demais itens já providenciados." },
-  { id:2,  day:"Qui 30/04", time:"15h+",           who:"Mari Camilo",    tel:"+5512982062718", local:"",                      status:"plan",     concluido:true,
+  { id:2,  day:"Qui 30/04", time:"15h+",          who:"Mari Camilo",    tel:"+5512982062718", local:"",          status:"plan",     concluido:true,
     desc:"Stand Feminina — 1 mesa baixa (tipo hall) e 1 poltrona. Logo do Feminina já autorizada pela pastora Ester." },
-  { id:3,  day:"Qui 30/04", time:"16h",            who:"Renan Cenários", tel:"+5512997400926", local:"Espelhado",             status:"imediata", concluido:true,
+  { id:3,  day:"Qui 30/04", time:"16h",           who:"Renan Cenários", tel:"+5512997400926", local:"Espelhado", status:"imediata", concluido:true,
     desc:"Levar as arquibancadas para a frente do espelhado." },
-  { id:4,  day:"Qui 30/04", time:"20h",            who:"Pr. Carlito",    tel:"Confidencial",   local:"Galeria",               status:"imediata", concluido:true,
+  { id:4,  day:"Qui 30/04", time:"20h",           who:"Pr. Carlito",    tel:"Confidencial",   local:"Galeria",   status:"imediata", concluido:true,
     desc:"Ligar os ventiladores da galeria." },
-  { id:5,  day:"Qui 30/04", time:"22h",            who:"Allan",          tel:"+5512982641127", local:"Auditório Nações",      status:"plan",     concluido:true,
+  { id:5,  day:"Qui 30/04", time:"22h",           who:"Allan",          tel:"+5512982641127", local:"Auditório Nações", status:"plan", concluido:true,
     desc:"Montagem do auditório Nações para a Creative-SE. Arrumar Nações pós sessão Eleve Conference." },
-  { id:6,  day:"Qui 30/04", time:"22h",            who:"Jhoey David",    tel:"+5512981754011", local:"Comunidade",            status:"imediata", concluido:true,
+  { id:6,  day:"Qui 30/04", time:"22h",           who:"Jhoey David",   tel:"+5512981754011", local:"Comunidade", status:"imediata", concluido:true,
     desc:"Arrumar as cadeiras do auditório comunidade." },
-  { id:7,  day:"Sex 01/05", time:"9h15",           who:"Giovani OC",     tel:"+5512997574857", local:"Nações",                status:"imediata", concluido:false,
+  { id:7,  day:"Sex 01/05", time:"9h15",          who:"Giovani OC",     tel:"+5512997574857", local:"Nações",    status:"imediata", concluido:true,
     desc:"Movimentação de 3 banquetas amarelas do Pitstop para o Talk." },
-  { id:8,  day:"Sex 01/05", time:"13h",            who:"Allan",          tel:"+5512982641127", local:"Auditório Nações",      status:"plan",     concluido:false,
+  { id:8,  day:"Sex 01/05", time:"11h",           who:"Mari Camilo",    tel:"+5512982062718", local:"",          status:"imediata", concluido:true,
+    desc:"Levar duas cadeiras para o espaço videira." },
+  { id:9,  day:"Sex 01/05", time:"11h",           who:"Giovani OC",     tel:"+5512997574857", local:"Principal", status:"imediata", concluido:true,
+    desc:"Colocar e retirar do cenário os móveis." },
+  { id:10, day:"Sex 01/05", time:"12h",           who:"Nicole",         tel:"+5512988994185", local:"Comunidade",status:"imediata", concluido:true,
+    desc:"Subir 2 poltronas para o palco do comunidade." },
+  { id:11, day:"Sex 01/05", time:"12h",           who:"Nicole",         tel:"+5512988994185", local:"Principal", status:"imediata", concluido:true,
+    desc:"Levar 3 banquetas amarelas do Pitstop para o Principal." },
+  { id:12, day:"Sex 01/05", time:"13h",           who:"Allan",          tel:"+5512982641127", local:"Auditório Nações", status:"plan", concluido:false,
     desc:"Desmontar tudo e voltar o auditório Nações ao normal, pós sessão da manhã." },
-  { id:9,  day:"Sex 01/05", time:"15h30–16h30",    who:"Jhoey David",   tel:"+5512981754011", local:"",                      status:"plan",     concluido:false,
+  { id:13, day:"Sex 01/05", time:"15h30–16h30",   who:"Jhoey David",   tel:"+5512981754011", local:"",          status:"plan",     concluido:false,
     desc:"Arrumar o auditório para a Sala Sobrenatural. Principal demanda: cadeiras. Voluntários envolvidos, mas precisam de apoio pela dinâmica da conf. Finalizar até 16h30." },
-  { id:10, day:"Sex 01/05", time:"~17h",           who:"Julia Sendretti",tel:"+5512982726046", local:"Comunidade",            status:"plan",     concluido:false,
+  { id:14, day:"Sex 01/05", time:"~17h",          who:"Julia Sendretti",tel:"+5512982726046", local:"Comunidade",status:"plan",     concluido:false,
     desc:"Levar arquibancadas que estarão em frente ao espelhado para o Comunidade." },
-  { id:11, day:"Sex 01/05", time:"18h50",          who:"Jhoey David",   tel:"+5512981754011", local:"",                      status:"plan",     concluido:false,
+  { id:15, day:"Sex 01/05", time:"18h50",         who:"Jhoey David",   tel:"+5512981754011", local:"",          status:"plan",     concluido:false,
     desc:"Reorganizar o auditório para as 30 Semanas. Mexer nas cadeiras após a Sala Sobrenatural. Voluntários não darão conta sozinhos." },
-  { id:12, day:"Sex 01/05", time:"19h–20h",        who:"Gabriela Baroni",tel:"+5511977413420", local:"Colina",                status:"plan",     concluido:false,
+  { id:16, day:"Sex 01/05", time:"19h–20h",       who:"Gabriela Baroni",tel:"+5511977413420", local:"Colina",    status:"plan",     concluido:false,
     desc:"Pegar as frutas da corrida na prefeitura, trazer para o espelhado e colocar nas mesas espalhadas pelos pontos na Colina (pontos a definir)." },
-  { id:13, day:"Sáb 02/05", time:"10h–11h30",      who:"Jhoey David",   tel:"+5512981754011", local:"",                      status:"plan",     concluido:false,
+  { id:17, day:"Sáb 02/05", time:"10h–11h30",     who:"Jhoey David",   tel:"+5512981754011", local:"",          status:"plan",     concluido:false,
     desc:"Arrumar o auditório para a Sala Sobrenatural. Principal demanda: cadeiras. Voluntários envolvidos, mas precisam de apoio pela dinâmica da conf. Finalizar até 11h30." },
-  { id:14, day:"Sáb 02/05", time:"10h",            who:"Giovani OC",     tel:"+5512997574857", local:"Comunidade",            status:"plan",     concluido:false,
+  { id:18, day:"Sáb 02/05", time:"10h",           who:"Giovani OC",     tel:"+5512997574857", local:"Comunidade",status:"plan",     concluido:false,
     desc:"Movimentação de móveis para Talk:",
     bullets:["1 sofá — Sapinha (camarim)","2 poltronas — Salas ministeriais","1 mesinha baixa redonda — Sala do Marcão","1 mesinha baixa redonda — Sapinha (camarim)"] },
-  { id:15, day:"Sáb 02/05", time:"10h",            who:"Giovani OC",     tel:"+5512997574857", local:"Principal",             status:"plan",     concluido:false,
+  { id:19, day:"Sáb 02/05", time:"10h",           who:"Giovani OC",     tel:"+5512997574857", local:"Principal", status:"plan",     concluido:false,
     desc:"Movimentação de móveis para Talk:",
     bullets:["1 sofá — Sapinha (camarim)","2 poltronas — Salas ministeriais","1 mesinha — Sala do Marcão","1 mesinha — Camarim"] },
-  { id:16, day:"Sáb 02/05", time:"15h (ev. 16h)",  who:"Thiago Silva",   tel:"+5512981909790", local:"",                      status:"plan",     concluido:false,
+  { id:20, day:"Sáb 02/05", time:"15h (ev. 16h)", who:"Thiago Silva",   tel:"+5512981909790", local:"",          status:"plan",     concluido:false,
     desc:"Colocar mesas para jogos de cartas e tabuleiro, retirar cadeiras para liberar espaço. Deixar 4–5 fileiras de frente para o palco." },
-  { id:17, day:"Sáb 02/05", time:"19h",            who:"Jhoey David",   tel:"+5512981754011", local:"",                      status:"plan",     concluido:false,
+  { id:21, day:"Sáb 02/05", time:"19h",           who:"Jhoey David",   tel:"+5512981754011", local:"",          status:"plan",     concluido:false,
     desc:"Arrumar as cadeiras do auditório. Voluntários estarão servindo na ministração da noite." },
 ];
 
 const TOTAL = tasks.length;
 
 // ── Controle de versão ─────────────────────────────────────────────
-// Altere APP_VERSION a cada nova versão do arquivo para limpar cache.
-const APP_VERSION = '2025-05-01-v3';
+const APP_VERSION = '2025-05-01-v5';
 if (localStorage.getItem('eleve_version') !== APP_VERSION) {
   const oldRatings = localStorage.getItem('eleve_ratings');
   localStorage.clear();
@@ -332,7 +307,6 @@ if (localStorage.getItem('eleve_version') !== APP_VERSION) {
 const storedDone = localStorage.getItem('eleve_done');
 let doneSet;
 if (storedDone === null) {
-  // First visit: initialize with tasks marked concluido:true
   doneSet = new Set(tasks.filter(t => t.concluido).map(t => t.id));
   localStorage.setItem('eleve_done', JSON.stringify([...doneSet]));
 } else {
@@ -401,9 +375,10 @@ function saveRating(id) {
 
 function render() {
   let filtered;
-  if (filter === 'imediata')   filtered = tasks.filter(t => t.status === 'imediata');
-  else if (filter === 'todos') filtered = tasks;
-  else                         filtered = tasks.filter(t => t.day === filter);
+  if      (filter === 'imediata') filtered = tasks.filter(t => t.status === 'imediata');
+  else if (filter === 'pendente') filtered = tasks.filter(t => !done.has(t.id));
+  else if (filter === 'todos')    filtered = tasks;
+  else                            filtered = tasks.filter(t => t.day === filter);
 
   const days = [...new Set(filtered.map(t => t.day))];
   let html = '';
@@ -421,7 +396,9 @@ function render() {
         const short   = t.desc.length > 60 ? t.desc.slice(0,60)+'…' : t.desc;
         const r       = ratings[t.id];
         const hasStar = r && r.stars > 0;
-        const starBadge = hasStar ? `<span style="font-size:12px;color:${isImed?'#C47500':'#D42B1E'};letter-spacing:1px">${'★'.repeat(r.stars)}</span>` : '';
+        const starBadge = hasStar
+          ? `<span style="font-size:12px;color:${isImed?'#C47500':'#D42B1E'};letter-spacing:1px">${'★'.repeat(r.stars)}</span>`
+          : '';
 
         const bulletsHTML = t.bullets
           ? `<ul class="desc-list">${t.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>` : '';
@@ -430,11 +407,14 @@ function render() {
           ? `<span class="tag tag-imediata">⚡ Imediata</span>`
           : `<span class="tag tag-plan">📅 Planejado</span>`;
 
-        const concTag = isDone ? `<span class="tag tag-concluido">✅ Concluído</span>` : '';
+        const doneTag = isDone
+          ? `<span class="tag tag-concluido">✅ Concluído</span>`
+          : '';
 
         const telLink = t.tel === 'Confidencial'
           ? `<span class="meta-val">Confidencial</span>`
           : `<span class="meta-val"><a href="tel:${t.tel}">${t.tel}</a></span>`;
+
         const callBtns = t.tel === 'Confidencial' ? '' :
           `<a class="btn btn-call" href="tel:${t.tel}">Ligar</a>
            <a class="btn btn-call" href="https://wa.me/${t.tel}">Zap</a>`;
@@ -449,7 +429,7 @@ function render() {
             </div>
             <div class="card-tags">
               ${statusTag}
-              ${concTag}
+              ${doneTag}
               <span class="tag tag-who">${t.who}</span>
               ${t.local ? `<span class="tag tag-local">${t.local}</span>` : ''}
               ${!isOpen ? starBadge : ''}
