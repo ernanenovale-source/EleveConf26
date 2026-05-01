@@ -193,7 +193,7 @@ const tasks = [
   {id:10, day:"Sex 01/05",time:"12h",          who:"Nicole",        tel:"+55 12 98899-4185",local:"Comunidade",status:"imediata",concluido:true,  desc:"Subir 2 poltronas para o palco do comunidade."},
   {id:11, day:"Sex 01/05",time:"12h",          who:"Nicole",        tel:"+55 12 98899-4185",local:"Principal", status:"imediata",concluido:true,  desc:"Levar 3 banquetas amarelas do Pitstop para o Principal."},
   {id:12, day:"Sex 01/05",time:"13h",          who:"Allan",         tel:"12982641127",      local:"Auditório Nações",status:"plan",concluido:true,  desc:"Desmontar tudo e voltar o auditório Nações ao normal, pós sessão da manhã."},
-  {id:13, day:"Sex 01/05",time:"15h30–16h30",  who:"Jhoey David",  tel:"12981754011",      local:"",          status:"plan",    concluido:false, desc:"Arrumar o auditório para a Sala Sobrenatural. Principal demanda: cadeiras. Voluntários envolvidos, mas precisam de apoio. Finalizar até 16h30."},
+  {id:13, day:"Sex 01/05",time:"15h30–16h30",  who:"Jhoey David",  tel:"12981754011",      local:"",          status:"plan",    concluido:true,  desc:"Arrumar o auditório para a Sala Sobrenatural. Principal demanda: cadeiras. Voluntários envolvidos, mas precisam de apoio. Finalizar até 16h30."},
   {id:14, day:"Sex 01/05",time:"~17h",         who:"Julia Sendretti",tel:"+55 12 98272-6046",local:"Comunidade",status:"plan",  concluido:false, desc:"Levar arquibancadas que estarão em frente ao espelhado para o Comunidade."},
   {id:15, day:"Sex 01/05",time:"17h",          who:"Pedro Zanchet", tel:"+55 12 99111-9739",local:"",          status:"imediata",concluido:false, desc:"Auxiliar a montagem da estrutura para a corrida."},
   {id:16, day:"Sex 01/05",time:"18h50",        who:"Jhoey David",  tel:"12981754011",      local:"",          status:"plan",    concluido:false, desc:"Reorganizar o auditório para as 30 Semanas. Mexer nas cadeiras após a Sala Sobrenatural. Voluntários não darão conta sozinhos."},
@@ -208,7 +208,7 @@ const tasks = [
 ];
 
 // ── version ──
-const APP_VERSION = '2025-05-01-v7';
+const APP_VERSION = '2025-05-01-v8';
 if(localStorage.getItem('eleve_version')!==APP_VERSION){localStorage.clear();localStorage.setItem('eleve_version',APP_VERSION);}
 
 const TOTAL   = tasks.length;
