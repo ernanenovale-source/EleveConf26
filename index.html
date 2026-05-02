@@ -205,16 +205,17 @@ const tasks = [
   {id:20, day:"Sex 01/05",time:"19h–20h",       who:"Gabriela Baroni",  tel:"+55 11 97741-3420",local:"Colina",     status:"plan",    concluido:true,  cancelado:false, desc:"Pegar as frutas da corrida na prefeitura, trazer para o espelhado e colocar nas mesas espalhadas pelos pontos na Colina (pontos a definir)."},
   {id:21, day:"Sex 01/05",time:"19h30",         who:"Thaina",           tel:"+55 12 98857-3503",local:"",           status:"imediata",concluido:true,  cancelado:false, desc:"Entrada da cama e 3 banquetas para o especial da noite."},
   {id:22, day:"Sex 01/05",time:"20h20",         who:"Larissa Fernandes",tel:"+55 12 99200-7889",local:"",           status:"imediata",concluido:true,  cancelado:false, desc:"Apoio na organização do percurso da corrida."},
-  {id:23, day:"Sáb 02/05",time:"10h–11h30",    who:"Jhoey David",     tel:"12981754011",      local:"",           status:"plan",    concluido:false, cancelado:false, desc:"Arrumar o auditório para a Sala Sobrenatural. Principal demanda: cadeiras. Voluntários envolvidos. Finalizar até 11h30."},
-  {id:24, day:"Sáb 02/05",time:"10h",           who:"Giovani OC",       tel:"+55 12 99757-4857",local:"Comunidade", status:"plan",    concluido:false, cancelado:false, desc:"Movimentação de móveis para Talk:",
+  {id:23, day:"Sex 01/05",time:"21h",           who:"Allan",            tel:"12982641127",      local:"",           status:"imediata",concluido:true,  cancelado:false, desc:"Levar mesas redondas para o DJ no percurso da corrida."},
+  {id:24, day:"Sáb 02/05",time:"10h–11h30",    who:"Jhoey David",     tel:"12981754011",      local:"",           status:"plan",    concluido:false, cancelado:false, desc:"Arrumar o auditório para a Sala Sobrenatural. Principal demanda: cadeiras. Voluntários envolvidos. Finalizar até 11h30."},
+  {id:25, day:"Sáb 02/05",time:"10h",           who:"Giovani OC",       tel:"+55 12 99757-4857",local:"Comunidade", status:"plan",    concluido:false, cancelado:false, desc:"Movimentação de móveis para Talk:",
     bullets:["1 sofá — Sapinha (camarim)","2 poltronas — Salas ministeriais","1 mesinha baixa redonda — Sala do Marcão","1 mesinha baixa redonda — Sapinha (camarim)"]},
-  {id:25, day:"Sáb 02/05",time:"10h",           who:"Giovani OC",       tel:"+55 12 99757-4857",local:"Principal",  status:"plan",    concluido:false, cancelado:false, desc:"Movimentação de móveis para Talk:",
+  {id:26, day:"Sáb 02/05",time:"10h",           who:"Giovani OC",       tel:"+55 12 99757-4857",local:"Principal",  status:"plan",    concluido:false, cancelado:false, desc:"Movimentação de móveis para Talk:",
     bullets:["1 sofá — Sapinha (camarim)","2 poltronas — Salas ministeriais","1 mesinha — Sala do Marcão","1 mesinha — Camarim"]},
-  {id:26, day:"Sáb 02/05",time:"15h (ev. 16h)", who:"Thiago Silva",     tel:"+55 12 98190-9790",local:"",           status:"plan",    concluido:false, cancelado:false, desc:"Colocar mesas para jogos de cartas e tabuleiro, retirar cadeiras. Deixar 4–5 fileiras de frente para o palco."},
-  {id:27, day:"Sáb 02/05",time:"19h",           who:"Jhoey David",     tel:"12981754011",      local:"",           status:"plan",    concluido:false, cancelado:false, desc:"Arrumar as cadeiras do auditório. Voluntários estarão servindo na ministração da noite."},
+  {id:27, day:"Sáb 02/05",time:"15h (ev. 16h)", who:"Thiago Silva",     tel:"+55 12 98190-9790",local:"",           status:"plan",    concluido:false, cancelado:false, desc:"Colocar mesas para jogos de cartas e tabuleiro, retirar cadeiras. Deixar 4–5 fileiras de frente para o palco."},
+  {id:28, day:"Sáb 02/05",time:"19h",           who:"Jhoey David",     tel:"12981754011",      local:"",           status:"plan",    concluido:false, cancelado:false, desc:"Arrumar as cadeiras do auditório. Voluntários estarão servindo na ministração da noite."},
 ];
 
-const APP_VERSION = '2025-05-01-v14';
+const APP_VERSION = '2025-05-01-v15';
 if(localStorage.getItem('eleve_version')!==APP_VERSION){localStorage.clear();localStorage.setItem('eleve_version',APP_VERSION);}
 
 const TOTAL   = tasks.filter(t=>!t.cancelado).length;
