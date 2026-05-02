@@ -225,7 +225,7 @@ const tasks = [
   {id:36, day:"Sáb 02/05",time:"21h",           who:"Lara Vitória",     tel:"12991606735",      local:"Hall Central",      status:"imediata",concluido:true,  cancelado:false, desc:"Auxiliar a marcenaria a colocar as placas dentro do caminhão. Desmontagem do hall na parte central e transporte para o caminhão estacionado em frente ao globo."},
 ];
 
-const APP_VERSION = '2025-05-02-v24';
+const APP_VERSION = '2025-05-02-v26';
 if(localStorage.getItem('eleve_version')!==APP_VERSION){localStorage.clear();localStorage.setItem('eleve_version',APP_VERSION);}
 
 const TOTAL   = tasks.filter(t=>!t.cancelado).length;
@@ -307,16 +307,23 @@ function renderKPI(){
 }
 
 function renderDonut(){
-  const done=doneIds.size, pend=TOTAL-done;
-  const pct=done/TOTAL;
+  const done=doneIds.size;
+  const pend=TOTAL-done;
+  const pct=TOTAL>0?done/TOTAL:0;
   const cx=60,cy=60,r=46,circ=2*Math.PI*r;
-  const dD=circ*pct, off=circ*.25;
+  const off=circ*.25;
+  // When 100%, draw a full circle directly instead of using dasharray
+  const greenArc = pct>=1
+    ? `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#1A6B32" stroke-width="14"/>`
+    : `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#1A6B32" stroke-width="14"
+        stroke-dasharray="${circ*pct} ${circ}" stroke-dashoffset="${off}" stroke-linecap="round"/>`;
+  const pendArc = (pend>0 && pct<1)
+    ? `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(212,43,30,.3)" stroke-width="14"
+        stroke-dasharray="${circ*(1-pct)} ${circ}" stroke-dashoffset="${off-circ*pct}" stroke-linecap="round"/>`
+    : '';
   document.getElementById('donutSvg').innerHTML=`
-    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(0,0,0,.08)" stroke-width="14"/>
-    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#1A6B32" stroke-width="14"
-      stroke-dasharray="${dD} ${circ}" stroke-dashoffset="${off}" stroke-linecap="round"/>
-    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(212,43,30,.3)" stroke-width="14"
-      stroke-dasharray="${circ*(1-pct)} ${circ}" stroke-dashoffset="${off-dD}" stroke-linecap="round"/>
+    ${pct<1?`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(0,0,0,.08)" stroke-width="14"/>`:''}
+    ${greenArc}${pendArc}
     <text x="${cx}" y="${cy-7}" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="22" fill="#1A0800">${Math.round(pct*100)}%</text>
     <text x="${cx}" y="${cy+11}" text-anchor="middle" font-family="Barlow Condensed" font-size="11" fill="#7A6050">concluído</text>`;
 
