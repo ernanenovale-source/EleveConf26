@@ -211,16 +211,16 @@ const tasks = [
     bullets:["1 sofá — Sapinha (camarim)","2 poltronas — Salas ministeriais","1 mesinha baixa redonda — Sala do Marcão","1 mesinha baixa redonda — Sapinha (camarim)"]},
   {id:26, day:"Sáb 02/05",time:"10h",           who:"Giovani OC",       tel:"+55 12 99757-4857",local:"Principal",  status:"plan",    concluido:true,  cancelado:false, desc:"Movimentação de móveis para Talk:",
     bullets:["1 sofá — Sapinha (camarim)","2 poltronas — Salas ministeriais","1 mesinha — Sala do Marcão","1 mesinha — Camarim"]},
-  {id:27, day:"Sáb 02/05",time:"12h",           who:"Giovani OC",       tel:"+55 12 99757-4857",local:"Comunidade", status:"imediata",concluido:false, cancelado:false, desc:"Devolver em seus respectivos lugares:",
+  {id:27, day:"Sáb 02/05",time:"12h",           who:"Giovani OC",       tel:"+55 12 99757-4857",local:"Comunidade", status:"imediata",concluido:true,  cancelado:false, desc:"Devolver em seus respectivos lugares:",
     bullets:["1 sofá — Sapinha (camarim)","2 poltronas — Salas ministeriais","1 mesinha baixa redonda — Sala do Marcão","1 mesinha baixa redonda — Sapinha (camarim)"]},
-  {id:28, day:"Sáb 02/05",time:"12h",           who:"Giovani OC",       tel:"+55 12 99757-4857",local:"Comunidade", status:"imediata",concluido:false, cancelado:false, desc:"Devolver em seus respectivos lugares:",
+  {id:28, day:"Sáb 02/05",time:"12h",           who:"Giovani OC",       tel:"+55 12 99757-4857",local:"Comunidade", status:"imediata",concluido:true,  cancelado:false, desc:"Devolver em seus respectivos lugares:",
     bullets:["4 poltronas para o reservado do Principal"]},
   {id:29, day:"Sáb 02/05",time:"15h (ev. 16h)", who:"Thiago Silva",     tel:"+55 12 98190-9790",local:"",           status:"plan",    concluido:false, cancelado:false, desc:"Colocar mesas para jogos de cartas e tabuleiro, retirar cadeiras. Deixar 4–5 fileiras de frente para o palco."},
   {id:30, day:"Sáb 02/05",time:"19h",           who:"Jhoey David",     tel:"12981754011",      local:"",           status:"plan",    concluido:false, cancelado:false, desc:"Arrumar as cadeiras do auditório. Voluntários estarão servindo na ministração da noite."},
   {id:31, day:"Sáb 02/05",time:"19h",           who:"Jhoey David",     tel:"12981754011",      local:"Auditório Nações",status:"plan",concluido:false, cancelado:false, desc:"Arrumar o auditório Nações após sala profética."},
 ];
 
-const APP_VERSION = '2025-05-02-v16';
+const APP_VERSION = '2025-05-02-v17';
 if(localStorage.getItem('eleve_version')!==APP_VERSION){localStorage.clear();localStorage.setItem('eleve_version',APP_VERSION);}
 
 const TOTAL   = tasks.filter(t=>!t.cancelado).length;
