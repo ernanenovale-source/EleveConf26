@@ -222,9 +222,10 @@ const tasks = [
   {id:33, day:"Sáb 02/05",time:"19h",           who:"Jhoey David",     tel:"12981754011",      local:"Auditório Nações",  status:"plan",    concluido:false, cancelado:false, desc:"Arrumar o auditório Nações após sala profética."},
   {id:34, day:"Sáb 02/05",time:"19h30",         who:"Thiago Silva",     tel:"+55 12 98190-9790",local:"Comunidade",        status:"plan",    concluido:false, cancelado:false, desc:"Arrumar as cadeiras do auditório Comunidade e devolver mesas ao Gerações."},
   {id:35, day:"Sáb 02/05",time:"20h30",         who:"Mari Camilo",      tel:"+55 12 98206-2718",local:"Gramado/Colégio",   status:"imediata",concluido:false, cancelado:false, desc:"Retirar mesas e cadeiras do gramado perto do colégio — infra pegou."},
+  {id:36, day:"Sáb 02/05",time:"21h",           who:"Lara Vitória",     tel:"12991606735",      local:"Hall Central",      status:"imediata",concluido:false, cancelado:false, desc:"Auxiliar a marcenaria a colocar as placas dentro do caminhão. Desmontagem do hall na parte central e transporte para o caminhão estacionado em frente ao globo."},
 ];
 
-const APP_VERSION = '2025-05-02-v21';
+const APP_VERSION = '2025-05-02-v22';
 if(localStorage.getItem('eleve_version')!==APP_VERSION){localStorage.clear();localStorage.setItem('eleve_version',APP_VERSION);}
 
 const TOTAL   = tasks.filter(t=>!t.cancelado).length;
